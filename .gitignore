@@ -2,6 +2,7 @@
 
 notes.txt
 web_app/trial/
+/logs
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
