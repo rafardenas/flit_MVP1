@@ -1,0 +1,120 @@
+  2021-07-07 11:37:09,523 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:52]
+2021-07-07 11:37:17,876 ERROR: Exception on /edit_profile [POST] [in /Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1770, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: user.username
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/routes.py", line 172, in edit_profile
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1428, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 829, in commit
+    self._prepare_impl()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
+    self.session.flush()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3298, in flush
+    self._flush(objects)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3438, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3398, in _flush
+    flush_context.execute()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 234, in save_obj
+    _emit_update_statements(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 998, in _emit_update_statements
+    c = connection._execute_20(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1582, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 323, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1451, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1813, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1994, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1770, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
+[SQL: UPDATE user SET username=?, about_me=? WHERE user.id = ?]
+[parameters: ('susan2', 'Im the first user', 1)]
+(Background on this error at: http://sqlalche.me/e/14/gkpj)
+2021-07-07 12:08:41,684 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:52]
+2021-07-07 13:53:00,688 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:52]
+2021-07-07 13:53:24,381 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:52]
+2021-07-13 11:07:12,248 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:51]
+2021-07-13 11:07:35,951 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:51]
+2021-07-13 11:07:42,504 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:51]
+2021-07-13 11:09:45,930 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:51]
+2021-07-13 11:11:37,444 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:51]
+2021-07-13 11:11:45,199 ERROR: Exception on /index [GET] [in /Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/routes.py", line 90, in index
+    return render_template('index.html', title='Home Page', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/jinja2/environment.py", line 1289, in render
+    self.environment.handle_exception()
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/jinja2/environment.py", line 924, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/templates/index.html", line 2, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/templates/base.html", line 34, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/templates/index.html", line 22, in block 'content'
+    {% include '_post.html' %}
+  File "/Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/templates/_post.html", line 10, in top-level template code
+    @ {{ post.timestamp.format('%m') }} says: <br> {{ post.body }}
+  File "/Users/Rafa/opt/anaconda3/envs/NLP_Env/lib/python3.8/site-packages/jinja2/utils.py", line 81, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'datetime.datetime object' has no attribute 'format'
+2021-07-13 11:13:13,677 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Deep Learning/NLP/BERT_and_Flask/web_app/app/__init__.py:51]
+2021-07-15 13:18:38,845 INFO: Microblog startup [in /Users/Rafa/Desktop/Learning/Web/Flask/web_app/app/__init__.py:54]
