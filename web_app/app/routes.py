@@ -1,4 +1,4 @@
-import os 
+"""import os 
 import sys
 #sys.path.append(os.getcwd())
 
@@ -21,7 +21,7 @@ from web_app.config2 import Config
 
 
 
-
+"""
 
 
 

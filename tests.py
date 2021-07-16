@@ -1,20 +1,26 @@
 from datetime import datetime, timedelta
 import unittest
-import sys
-#sys.path.append("..") #this was the key for everything
-from web_app.app import app, db
+from web_app.app import create_app, db
 from web_app.app.models import User, Post
+from web_app.config2 import Config
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite://"
 
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push() #doing this so that flask nows which application is refering to. Part of the 'application context' and 'request context' Flask variables
         db.create_all()
 
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_password_hashing(self):
         u = User(username='susan')

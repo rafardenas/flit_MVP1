@@ -3,10 +3,10 @@ from datetime import datetime
 from web_app.app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from web_app.app import login, app, db
 from web_app.config2 import Config
 from time import time
 import jwt
+from web_app.app import login, db
 
 db.metadata.clear()
 

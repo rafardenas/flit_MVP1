@@ -11,14 +11,17 @@ print(os.environ.get('FLASK_APP'))
 #    os.environ['FLASK_APP'] = "first"
 
 
-from web_app.app import app, db
+from web_app.app import create_app, db
 from web_app.app.models import User, Post
+
+app = create_app()
 
 @app.shell_context_processor
 def make_shell_context():
     return {'db' : db, 'User' : User, 'Post': Post}
 
-
 if __name__ == "__main__":
     app.run()
+
+
 
