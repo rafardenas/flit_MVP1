@@ -4,6 +4,7 @@ from web_app.app.forms import PostForm
 from web_app.app.models import Post
 from werkzeug.urls import url_parse
 from web_app.config2 import Config
+from web_app.app import db
 
 main_bp = Blueprint('main_bp', __name__, template_folder='templates')
 
@@ -26,7 +27,7 @@ def index():
     next_url = url_for('main_bp.index', page=posts.next_num) if posts.has_next else None
     prev_url = url_for('main_bp.index', page=posts.prev_num) if posts.has_prev else None
 
-    return render_template('main_bp/index.html', title='Home Page', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template('main/index.html', title='Home Page', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
 
 
@@ -36,6 +37,6 @@ def index():
 def explore():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
-    next_url = url_for('.explore', page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('.explore', page=posts.prev_num) if posts.has_prev else None
-    return render_template('main_bp/index.html', title='Explore', posts=posts.items, next_url=next_url, prev_url=prev_url)
+    next_url = url_for('main.explore', page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('main.explore', page=posts.prev_num) if posts.has_prev else None
+    return render_template('main/index.html', title='Explore', posts=posts.items, next_url=next_url, prev_url=prev_url)

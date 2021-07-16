@@ -5,15 +5,24 @@ from web_app.app.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
 from web_app.config2 import Config
-from web_app.app.email_mod import *
+from web_app.app.user.email_mod import send_password_reset_email
+from web_app.app import db
+
+
 
 user_bp = Blueprint('user_bp', __name__, template_folder='templates')
 
 
+@user_bp.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
+    
 @user_bp.route('/register', methods=['POST', 'GET'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('.main_bp.index'))
+        return redirect(url_for('main_bp.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -21,8 +30,8 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash("User registered succesfully!")
-        return redirect(url_for('.auth_bp.login'))
-    return render_template('user_bp/register.html', title = "Signup", form=form)
+        return redirect(url_for('auth_bp.login'))
+    return render_template('user/register.html', title = "Signup", form=form)
 
 @user_bp.route('/user/<username>')
 @login_required
@@ -33,13 +42,7 @@ def user(username):
     next_url = url_for('user_bp.user', username=user.username, page=posts.next_num) if posts.has_next else None
     prev_url = url_for('user_bp.user', username=user.username, page=posts.prev_num) if posts.has_prev else None
     form = EmptyForm()    
-    return render_template('user_bp/user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url, form=form) 
-
-@user_bp.before_request
-def before_request():
-    if current_user.is_authenticated:
-        current_user.last_seen = datetime.utcnow()
-        db.session.commit()
+    return render_template('user/user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url, form=form) 
 
 
 
@@ -56,7 +59,7 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('user_bp/edit_profile.html', title='Edit Profile', form=form)
+    return render_template('user/edit_profile.html', title='Edit Profile', form=form)
 
 
 
@@ -68,7 +71,7 @@ def follow(username):
         user = User.query.filter_by(username=username).first()
         if user is None:
             flash('User {} not found'.format(username))
-            return redirect(url_for('.main_bp.index'))
+            return redirect(url_for('main_bp.index'))
         if user == current_user:
             flash('You cannot follow yourself!')
             return redirect(url_for('user_bp.user', username=username))
@@ -77,7 +80,7 @@ def follow(username):
         flash('Now you are following {}'.format(username))
         return redirect (url_for('user_bp.user', username=username))
     else:
-        return redirect(url_for('.main_bp.index'))
+        return redirect(url_for('main_bp.index'))
 
 
 
@@ -89,7 +92,7 @@ def unfollow(username):
         user = User.query.filter_by(username=username).first()
         if user is None:
             flash('User {} not found'.format(username))
-            return redirect(url_for('.main_bp.index'))
+            return redirect(url_for('main_bp.index'))
         if user == current_user:
             flash('You cannot unfollow yourself!')
             return redirect(url_for('user_bp.user', username=username))
@@ -98,7 +101,7 @@ def unfollow(username):
         flash('You do not follow {} anymore'.format(username))
         return redirect(url_for('user_bp.user', username=username))
     else:
-        return redirect(url_for('.main_bp.index'))
+        return redirect(url_for('main_bp.index'))
 
 
 

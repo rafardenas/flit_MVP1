@@ -2,7 +2,7 @@ import os
 import smtplib, ssl
 from email.message import EmailMessage
 from typing import Text
-from flask import render_template
+from flask import render_template, current_app
 from web_app.config2 import Config
 #from web_app.app.templates.email import reset_password as reset_pass_html
 
@@ -36,7 +36,7 @@ def send_password_reset_email(user):
     send_email('[Flit] Reset Your Password',
                sender=Config.ADMINS[0],
                recipients=[user.email],
-               text_body=render_template('email_folder/reset_password.txt',
+               text_body=render_template('user/reset_password_mail.txt',
                                          user=user, token=token),
-               html_body=render_template('email_folder/reset_password.html',
+               html_body=render_template('user/reset_password_mail.html',
                                          user=user, token=token))

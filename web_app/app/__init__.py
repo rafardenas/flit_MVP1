@@ -11,15 +11,28 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 
 
+
+
+
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.init_app(app)
-login.login_view = "login"
+login.login_view = "auth_bp.login"
 mail = Mail(app)
 bootstrap = Bootstrap(app)
+
+
+from web_app.app.auth.auth import auth_bp
+from web_app.app.errors.errors import errors_bp
+from web_app.app.main.main import main_bp
+from web_app.app.user.user import user_bp
+app.register_blueprint(auth_bp, url_prefix="/auth")
+app.register_blueprint(errors_bp, url_prefix="/error")
+app.register_blueprint(main_bp)
+app.register_blueprint(user_bp, url_prefix="/user")
 
 #db.create_all()
 #db.drop_all()
@@ -53,7 +66,7 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info("Microblog startup")
 
-from web_app.app import routes, models, errors
+from web_app.app import routes, models
 
         
 

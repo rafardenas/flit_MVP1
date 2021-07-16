@@ -1,6 +1,6 @@
 <!--User profile template-->
 
-{% extends "base.html" %}
+{% extends "main/base.html" %}
 
 {% block app_content %}
     <table class="table table-hover">
@@ -12,17 +12,17 @@
                 {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime("%d/%m/%y %H:%M") }}</p>{% endif %}
                 <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following</p>
                 {% if user == current_user %}
-                <p><a href= "{{ url_for('edit_profile') }}">Edit your profile</a></p>
+                <p><a href= "{{ url_for('user_bp.edit_profile') }}">Edit your profile</a></p>
                 {% elif not current_user.is_following(user) %}
                 <p>
-                    <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                    <form action="{{ url_for('user_bp.follow', username=user.username) }}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='Seguir', class_="btn btn-primary") }}
                     </form>
                 </p>
                 {% else %}
                 <p>
-                    <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                    <form action="{{ url_for('user_bp.unfollow', username=user.username) }}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='Dejar de seguir', class_="btn btn-primary") }}
                     </form>
@@ -34,7 +34,7 @@
 
     <table>
         {% for post in posts %}
-            {% include '_post.html' %}
+            {% include 'main/_post.html' %}
         {% endfor %}
         <nav aria-label="...">
             <ul class="pager">

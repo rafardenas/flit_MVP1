@@ -12,7 +12,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from web_app.app.models import User, Post
 from datetime import datetime
 from web_app.config2 import Config
-from web_app.app.email_mod import *
+
 
 # routes are defined with the following decorator
 # in flask, the routes/links are defined with python functions
