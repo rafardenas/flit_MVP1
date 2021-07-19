@@ -29,6 +29,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    db.create_all()
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
