@@ -3,15 +3,16 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from web_app.app.models import User
+from flask import request
 
 
 #encapsulate each of the forms in one class
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])    #validators argument is to check that field is not empty
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    username = StringField('Nombre de usuario', validators=[DataRequired()])    #validators argument is to check that field is not empty
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    remember_me = BooleanField('Recordarme')
+    submit = SubmitField('Entrar')
 
 class RegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
@@ -61,6 +62,14 @@ class ResetPasswordForm(FlaskForm):
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset my password')
 
-    
+class SearchForm(FlaskForm):
+    q = StringField("Buscar fletes", validators=[DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        if 'formdata' not in kwargs:
+            kwargs['formdata'] = request.args
+        if 'csrf_enabled' not in kwargs:
+            kwargs['csrf_enabled'] = False
+        super(SearchForm, self).__init__(*args, **kwargs)
 
 

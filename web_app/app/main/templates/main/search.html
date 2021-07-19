@@ -1,14 +1,8 @@
-<!--This is the index template-->
 {%- extends "main/base.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
-    {% if form %}
-    {{ wtf.quick_form(form) }}
-    <br>
-    {% endif %}
 
+    <h1>Resultados de Búsqueda</h1> 
     {% for post in posts %}
         {% include 'main/_post.html' %}
     {% endfor %}
@@ -16,12 +10,12 @@
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true">&larr;</span> Anuncios más nuevos
+                    <span aria-hidden="true">&larr;</span>Página anterior
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
                 <a href="{{ next_url or '#' }}">
-                    Anuncios más antiguos <span aria-hidden="true">&rarr;</span>
+                    <span aria-hidden="true">&rarr;</span>Página siguiente
                 </a>
             </li>
         </ul>

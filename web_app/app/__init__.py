@@ -8,6 +8,8 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
+from elasticsearch import Elasticsearch
+
 
 
 
@@ -19,15 +21,17 @@ login.login_message = ('Por favor inicia sesion para ver los fletes disponibles'
 mail = Mail()
 bootstrap = Bootstrap()
 
+
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
+    #db.current_app.create_all()
 
     from web_app.app.auth.auth import auth_bp
     from web_app.app.errors.errors import errors_bp
@@ -37,7 +41,9 @@ def create_app(config_class=Config):
     app.register_blueprint(errors_bp, url_prefix="/error")
     app.register_blueprint(main_bp)
     app.register_blueprint(user_bp, url_prefix="/user")
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
 
+    
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
             #===========SMTPHandler:
