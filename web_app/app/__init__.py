@@ -9,6 +9,7 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from elasticsearch import Elasticsearch
+import psycopg2
 
 
 
@@ -31,7 +32,7 @@ def create_app(config_class=Config):
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
-    #db.current_app.create_all()
+
 
     from web_app.app.auth.auth import auth_bp
     from web_app.app.errors.errors import errors_bp
@@ -42,6 +43,8 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
     app.register_blueprint(user_bp, url_prefix="/user")
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
     
     if not app.debug and not app.testing:
