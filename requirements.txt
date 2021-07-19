@@ -29,8 +29,6 @@ joblib
 jwt==1.2.0
 Mako==1.1.4
 MarkupSafe 
-mkl-random 
-mkl-service==2.3.0
 numpy 
 olefile==0.46
 packaging 
@@ -54,12 +52,7 @@ scikit-learn==0.22.1
 scipy==1.4.1
 six 
 SQLAlchemy 
-tokenizers==0.10.3
-torch==1.8.1
-torchaudio==0.8.0a0+e4e171a
-torchvision==0.9.1
 tqdm 
-transformers==4.6.1
 typing-extensions 
 urllib3 
 visitor==0.1.3
