@@ -1,0 +1,1 @@
+web: flask db upgrade; gunicorn flit_beta:app

@@ -10,7 +10,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace('postgres://', 'postgresql://') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     print(SQLALCHEMY_DATABASE_URI)
     #print(os.environ.get('DATABASE_URL'))
@@ -29,6 +29,7 @@ class Config(object):
     POSTS_PER_PAGE = 25
 
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 
 
     

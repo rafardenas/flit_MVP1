@@ -19,6 +19,7 @@ Flask-Migrate==3.0.1
 Flask-SQLAlchemy @ file:///tmp/build/80754af9/flask-sqlalchemy_1616180561581/work
 Flask-WTF @ file:///tmp/build/80754af9/flask-wtf_1622018667443/work
 greenlet @ file:///opt/concourse/worker/volumes/live/3ef4f3fa-d3c5-4d18-614a-db20c54a531f/volume/greenlet_1620913631134/work
+gunicorn==20.1.0
 huggingface-hub==0.0.8
 idna @ file:///home/linux1/recipes/ci/idna_1610986105248/work
 importlib-metadata @ file:///opt/concourse/worker/volumes/live/a634a87c-b5e5-41bd-628d-cd0413666c93/volume/importlib-metadata_1617877368300/work
@@ -37,6 +38,7 @@ packaging @ file:///tmp/build/80754af9/packaging_1611952188834/work
 pandas==1.2.4
 Pillow @ file:///opt/concourse/worker/volumes/live/ca23594b-6e35-4c8c-5637-50ac0b550473/volume/pillow_1617386168018/work
 protobuf==3.14.0
+psycopg2-binary==2.9.1
 pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
 PyJWT @ file:///home/conda/feedstock_root/build_artifacts/pyjwt_1619620644068/work
 pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1608057966937/work

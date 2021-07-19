@@ -63,13 +63,19 @@ def create_app(config_class=Config):
             # app.logger.addHandler(mail_handler) Uncoment to send log through email
 
             #==========RotatingFile Handler
+            if app.config['LOG_TO_STDOUT']:
+                stream_handler = logging.StreamHandler()
+                stream_handler.setLevel(logging.INFO)
+                app.logger.addHandler(stream_handler)
 
-        if not os.path.exists('logs'):
-            os.mkdir('logs')
-        file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240, backupCount=10)
-        file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-        file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
+            else:
+                if not os.path.exists('logs'):
+                    os.mkdir('logs')
+                file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240, backupCount=10)
+                file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+                file_handler.setLevel(logging.INFO)
+                app.logger.addHandler(file_handler)
+
         app.logger.setLevel(logging.INFO)
         app.logger.info("Flit_beta startup")
     
