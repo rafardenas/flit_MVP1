@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-import 
 #sys.path.append(os.getcwd())
 #sys.path.append('.')
 #basedir = os.path.abspath(os.path.dirname(__file__))
