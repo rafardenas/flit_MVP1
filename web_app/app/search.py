@@ -12,7 +12,7 @@ def add_to_index(index, model):
     payload = {}
     for field in model.__searchable__:
         payload[field] = getattr(model, field)
-    print(index)
+    current_app.elasticsearch.indices.create(index=index, ignore=400)          #create index in case it does not exist
     current_app.elasticsearch.index(index=index, id=model.id, body=payload)
 
 def remove_from_index(index, model):
