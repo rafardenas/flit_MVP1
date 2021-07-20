@@ -43,8 +43,8 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
     app.register_blueprint(user_bp, url_prefix="/user")
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
-    DATABASE_URL = os.environ['DATABASE_URL']
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    #DATABASE_URL = os.environ['DATABASE_URL']
+    #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
     
     if not app.debug and not app.testing:

@@ -31,7 +31,7 @@ def register():
         db.session.commit()
         flash("User registered succesfully!")
         return redirect(url_for('auth_bp.login'))
-    return render_template('user/register.html', title = "Signup", form=form)
+    return render_template('user/register.html', title = "Regístrate", form=form)
 
 @user_bp.route('/user/<username>')
 @login_required
@@ -59,7 +59,7 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('user/edit_profile.html', title='Edit Profile', form=form)
+    return render_template('user/edit_profile.html', title='Editar Perfil', form=form)
 
 
 
@@ -119,7 +119,7 @@ def reset_password_request():
             return redirect(url_for('auth_bp.login'))
         else:
             flash('No account with that email, try again')
-    return render_template('user/reset_password_request.html', title='Reset Password', form=form)
+    return render_template('user/reset_password_request.html', title='Restablecer contraseña', form=form)
 
 
 

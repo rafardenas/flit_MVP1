@@ -3,17 +3,6 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <div class='container cta'>    
-    <div class="header-content">
-        <h1>No viajes vacío</h1>
-        <h1>Consigue cargas, fácil</h1>
-        <div class='buttons'>
-            <a class="btn btn-primary cta" href="{{ url_for('main_bp.explore') }}" role="button">Transportista, consigue fletes!</a>
-            <a class="btn btn-primary cta" href="{{ url_for('main_bp.explore') }}" role="button">Embarcador, envía!</a>
-        </div>
-    </div>
-    </div>
-
     <h1>Hi, {{ current_user.username }}!</h1>
     {% if form %}
     {{ wtf.quick_form(form) }}

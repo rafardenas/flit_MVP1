@@ -28,7 +28,7 @@ def index():
     next_url = url_for('main_bp.index', page=posts.next_num) if posts.has_next else None
     prev_url = url_for('main_bp.index', page=posts.prev_num) if posts.has_prev else None
 
-    return render_template('main/index.html', title='Home Page', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template('main/index.html', title='Inicio', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
 
 
@@ -40,7 +40,7 @@ def explore():
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
     next_url = url_for('main_bp.explore', page=posts.next_num) if posts.has_next else None
     prev_url = url_for('main_bp.explore', page=posts.prev_num) if posts.has_prev else None
-    return render_template('main/index.html', title='Explore', posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template('main/index.html', title='Explorar Fletes', posts=posts.items, next_url=next_url, prev_url=prev_url)
 
 @main_bp.before_app_request
 def before_request():
@@ -60,4 +60,4 @@ def search():
     next_url = url_for('.search', q=g.search_form.q.data, page=page+1) \
         if total > page * current_app.config['POSTS_PER_PAGE'] else None
     prev_url = url_for('.search', q=g.search_form.q.data, page=page-1) if page > 1 else None
-    return render_template('main/search.html', title = 'Search', posts=posts, next_url=next_url, prev_url=prev_url)
+    return render_template('main/search.html', title = 'Buscar Fletes', posts=posts, next_url=next_url, prev_url=prev_url)
