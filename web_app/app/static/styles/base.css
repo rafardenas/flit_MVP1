@@ -21,7 +21,7 @@ ul {
     list-style: none;
 }
 
-img {
+img {   
     width: 100%;
 }
 
@@ -99,3 +99,16 @@ img {
     position: relative;
     right: 10px;
 }
+
+.container-cards {
+    position: relative;
+    /*left: 20%;*/
+}
+
+
+.card-body {
+    text-align: left;
+}
+
+
+

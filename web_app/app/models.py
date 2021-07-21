@@ -159,7 +159,8 @@ class CargasEmbarcadores(SearchableMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     origen = db.Column(db.String(140))
     destino = db.Column(db.String(140))
-    equipo_solicitado = db.Column(db.String(140), default=None)   #caja seca, redilas, plataforma, etc
+    equipo_solicitado = db.Column(db.String(140), default="No info")   #caja seca, redilas, plataforma, etc
+    carga = db.Column(db.String(140), default="No info")
     precio_total_ofertado = db.Column(db.Float, default=None)
     precio_por_unidad_ofertado = db.Column(db.Float, default=None)
     descripcion = db.Column(db.String(140))

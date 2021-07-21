@@ -6,14 +6,14 @@
     <br>
     {% if current_user.username %}
     <h1>Hola, {{ current_user.username }}!</h1>
+    <h3>Oferta tus cajas vacías y consigue carga fácil y rápido</h3>
     {% else %}
     <h3>Inicia sesión para ofertar tus cajas vacías</h3>
-    <br>
     {% endif %}
+    <hr>
     {% if form %}
     <form action="" method="post">
         {{ form.csrf_token() }}
-        
         <div class="form-row">
           <div class="form-group col-md-6">
             {{ wtf.form_field(form.origen, class='form-control', placeholder='Monterrey') }}
@@ -45,19 +45,44 @@
     <br>
     {% endif %}
 
-    {% for post in posts %}
-        {% include 'main/_post.html' %}
-    {% endfor %}
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+          <table class="table table-hover">
+            <tr>
+             
+            <div class="container-cards">
+                <div class="row justify-content-around">
+                    <td>
+                    <div class="col-4">
+                        <div class="card-body">
+                            <h1 style="text-align: center;">Fletes disponibles</h1>
+                            <p class="card-text" >
+                                {% for post in posts %}
+                                    {% include 'main/_post.html' %}
+                                {% endfor %}  
+                            </p>
+                        </div>
+                    </div>
+                    </td>
+                    </div>
+                </div>
+            </tr>  
+            </table>
+        </div>
+    </div>
+
+    
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true">&larr;</span> Anuncios más nuevos
+                    <span aria-hidden="true">&larr;</span> Más nuevos
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
                 <a href="{{ next_url or '#' }}">
-                    Anuncios más antiguos <span aria-hidden="true">&rarr;</span>
+                    Más antiguos <span aria-hidden="true">&rarr;</span>
                 </a>
             </li>
         </ul>

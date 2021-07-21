@@ -17,7 +17,25 @@ $ heroku run python
 ```
 
 
+```
+q1 = sess.query(SomeClass).filter(SomeClass.foo=='bar')
+q2 = sess.query(SomeClass).filter(SomeClass.bar=='foo')
 
+q3 = q1.union(q2)
+```
 
+**Is there a way to have a child DIV within a parent container DIV that is wider than it's parent. The child DIV needs to be the same width of the browser viewport.?**
 
+```.child-div {
+    position:absolute;
+    left:0;
+    right:0;
+}
+```
 
+**CSS: how to position element in lower right?**
+```
+position: absolute;
+bottom: 0;
+right: 0;
+```

@@ -1,19 +1,54 @@
 <!--subtemplate for every post-->
 
-<table class="table table-hover">
-    <tr>
-        <td width="70px">
-            <a href="{{ url_for('user_bp.user', username=post.user.username) }}">
-                <img src="{{ post.user.avatar(50) }}" />
-            </a>
-        </td>
-        <td>
-            <a href="{{ url_for('user_bp.user', username=post.user.username) }}">
+
+<div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Origen</th>
+          <th>Destino</th>
+          {%if post.equipo_solicitado%}
+            <th>Equipo solicitado</th>
+            <th>Carga</th>
+            <th>Total a pagar:</th>
+          {%else%}
+          <th>Equipo</th>
+          <th>Total a cobrar:</th>
+          {%endif%}
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>
+                <a href="{{ url_for('user_bp.user', username=post.user.username) }}">
                 {{ post.user.username }}       
-            </a>
-            @
-            {{ post.timestamp.strftime("%d/%m/%y %H:%M") }}<br>
-            {{ post.descripcion }} 
-        </td>     
-    </tr>
-</table>
+                </a>
+                @
+                {{ post.timestamp.strftime("%d/%m/%y %H:%M") }}
+            </td>
+            <td>{{ post.origen }}</td>
+            <td>{{ post.destino }}</td>
+            {%if post.equipo_solicitado%}
+                <td>{{ post.equipo_solicitado }}</td>
+                <td>{{ post.carga }}</td>
+            {%else%}
+            <td>{{ post.equipo }}</td>
+            {%endif%}
+
+            {%if post.equipo_solicitado%}
+            <td>${{ post.precio_total_ofertado }}</td>
+            {%else%}
+            <td>${{ post.precio_total_deseado }}</td>
+            {%endif%}
+            
+            <td><a href="#"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
+                Más Información
+              </button></td></a>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
