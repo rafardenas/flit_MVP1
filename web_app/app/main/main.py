@@ -57,7 +57,7 @@ def transportistas():
     posts = CargasEmbarcadores.query.order_by(CargasEmbarcadores.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
     next_url = url_for('main_bp.transportistas', page=posts.next_num) if posts.has_next else None
     prev_url = url_for('main_bp.transportistas', page=posts.prev_num) if posts.has_prev else None
-    return render_template('main/transportistas.html', title='Encuentra carga, rápido', posts=posts.items, next_url=next_url, prev_url=prev_url, form=form, user=current_user.username)
+    return render_template('main/transportistas.html', title='Encuentra carga, rápido', posts=posts.items, next_url=next_url, prev_url=prev_url, form=form)
 
 
 @main_bp.route('/embarcadores', methods=['GET', 'POST'])  
