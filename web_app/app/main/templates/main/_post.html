@@ -9,12 +9,12 @@
           <th>Origen</th>
           <th>Destino</th>
           {%if not post.equipo_solicitado%}
-            <th>Equipo solicitado</th>
-            <th>Carga</th>
+            <th>Equipo disponible</th>
             <th>Total a pagar:</th>
-          {%else%}
-          <th>Equipo</th>
-          <th>Total a cobrar:</th>
+            {%else%}
+            <th>Equipo solicitado</th>
+            <th>Tipo de Carga</th>
+            <th>Total a cobrar:</th>
           {%endif%}
           <th></th>
         </tr>
@@ -31,16 +31,16 @@
             <td>{{ post.origen }}</td>
             <td>{{ post.destino }}</td>
             {%if not post.equipo_solicitado%}
-                <td>{{ post.equipo_solicitado }}</td>
-                <td>{{ post.carga }}</td>
+                <td>{{ post.equipo }}</td>
             {%else%}
-            <td>{{ post.equipo }}</td>
+            <td>{{ post.carga }}</td>
+            <td>{{ post.equipo_solicitado }}</td>
             {%endif%}
 
             {%if not post.equipo_solicitado%}
-            <td>${{ post.precio_total_ofertado }}</td>
-            {%else%}
             <td>${{ post.precio_total_deseado }}</td>
+            {%else%}
+            <td>${{ post.precio_total_ofertado }}</td>
             {%endif%}
             
             <td><a href="#"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">

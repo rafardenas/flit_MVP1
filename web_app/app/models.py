@@ -142,6 +142,7 @@ class FletesTransportistas(SearchableMixin, db.Model):
     origen = db.Column(db.String(140))
     destino = db.Column(db.String(140))
     equipo = db.Column(db.String(140), default=None)
+    helper = db.Column(db.String(140), default=None) #columna para que ambas tablas tengan el mismo numero de columnas y hacer UNION
     precio_total_deseado = db.Column(db.Float, default=None)
     precio_por_unidad_deseado = db.Column(db.Float, default=None)
     descripcion = db.Column(db.String(140))

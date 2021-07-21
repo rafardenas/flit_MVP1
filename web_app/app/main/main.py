@@ -54,10 +54,10 @@ def transportistas():
         flash("Listo, en poco tiempo alguien te contactará")
         return redirect(url_for('main_bp.transportistas'))
     page = request.args.get('page', 1, type=int)
-    posts = FletesTransportistas.query.order_by(FletesTransportistas.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
+    posts = CargasEmbarcadores.query.order_by(CargasEmbarcadores.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
     next_url = url_for('main_bp.transportistas', page=posts.next_num) if posts.has_next else None
     prev_url = url_for('main_bp.transportistas', page=posts.prev_num) if posts.has_prev else None
-    return render_template('main/transportistas.html', title='Encuentra carga, rápido', posts=posts.items, next_url=next_url, prev_url=prev_url, form=form)
+    return render_template('main/transportistas.html', title='Encuentra carga, rápido', posts=posts.items, next_url=next_url, prev_url=prev_url, form=form, user=current_user.username)
 
 
 @main_bp.route('/embarcadores', methods=['GET', 'POST'])  
@@ -77,7 +77,7 @@ def embarcadores():
         flash("Listo, en poco tiempo encontrarás un transportista")
         return redirect(url_for('main_bp.embarcadores'))
     page = request.args.get('page', 1, type=int)
-    posts = CargasEmbarcadores.query.order_by(CargasEmbarcadores.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
+    posts = FletesTransportistas.query.order_by(FletesTransportistas.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
     next_url = url_for('main_bp.embarcadores', page=posts.next_num) if posts.has_next else None
     prev_url = url_for('main_bp.embarcadores', page=posts.prev_num) if posts.has_prev else None
     return render_template('main/embarcadores.html', title='Envía tu mercancía, facil', posts=posts.items, next_url=next_url, prev_url=prev_url, form=form)
