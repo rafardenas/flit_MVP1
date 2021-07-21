@@ -12,13 +12,13 @@ print(os.environ.get('FLASK_APP'))
 
 
 from web_app.app import create_app, db
-from web_app.app.models import User, Post
+from web_app.app.models import User, Post, FletesTransportistas, CargasEmbarcadores
 
 app = create_app()
 
 @app.shell_context_processor
 def make_shell_context():
-    return {'db' : db, 'User' : User, 'Post': Post}
+    return {'db' : db, 'User' : User, 'Post': Post, 'FletesTransportistas':FletesTransportistas, 'CargasEmbarcadores':CargasEmbarcadores }
 
 if __name__ == "__main__":
     app.run()

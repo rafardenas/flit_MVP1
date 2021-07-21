@@ -15,26 +15,26 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Entrar')
 
 class RegistrationForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    password2 = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Signup')
+    username = StringField("Nombre de usuario", validators=[DataRequired()])
+    email = StringField("Correo Electrónico", validators=[DataRequired(), Email()])
+    password = PasswordField("Contraseña", validators=[DataRequired()])
+    password2 = PasswordField("Confirmar Contraseña", validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Registrarse')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError("Please use a different username.")
+            raise ValidationError("Por favor usa otro nombre de usuario")
     
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError("Email already taken.")
+            raise ValidationError("Email ya esta registrado")
 
 class EditProfileForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    about_me = TextAreaField("About me", validators=[Length(min=0, max=140)])
-    submit = SubmitField('Submit')
+    username = StringField("Nombre de usuario", validators=[DataRequired()])
+    about_me = TextAreaField("Mi información:", validators=[Length(min=0, max=140)])
+    submit = SubmitField('Confirmar')
 
     def __init__(self, original_username, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
@@ -44,23 +44,43 @@ class EditProfileForm(FlaskForm):
         if username.data != self.original_username:
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
-                raise ValidationError('Username already taken, please use another')
+                raise ValidationError('Email ya esta registrado')
                 
 class EmptyForm(FlaskForm):
     submit = SubmitField("Submit")
 
-class PostForm(FlaskForm):
-    post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])
-    submit = SubmitField("Post!")
+class PostTransportistas(FlaskForm):
+    origen = StringField("Origen", validators=[DataRequired()])
+    destino = StringField("Destino", validators=[DataRequired()])
+    equipo = StringField("Equipo Disponible", validators=[DataRequired()])
+    precio_total_deseado = StringField("Introduce un estimado", validators=[DataRequired()])
+    precio_por_unidad_deseado = StringField("Precio por unidad deseado")
+    descripcion = TextAreaField("Información extra", validators=[Length(min=0, max=140)])
+    usar_info_perfil = BooleanField('Usar información de mi perfil')
+    contacto = StringField("Contacto preferido")
+    submit = SubmitField("Publicar!")
+
+class PostEmbarcadores(FlaskForm):
+    origen = StringField("Origen", validators=[DataRequired()])
+    destino = StringField("Destino", validators=[DataRequired()])
+    equipo_solicitado = StringField("Equipo Solicitado", validators=[DataRequired()])
+    precio_total_ofertado = StringField("Total a Pagar", validators=[DataRequired()])
+    precio_por_unidad_ofertado = StringField("Precio por Tonelada a Pagar")
+    descripcion = TextAreaField("Información extra, permisos necesarios, consideraciones especiales", validators=[Length(min=0, max=140)])
+    usar_info_perfil = BooleanField('Usar información de mi perfil')
+    contacto = StringField("Forma de contacto")
+    submit = SubmitField("Publicar!")
+
+
 
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+    submit = SubmitField('Recuperar mi contraseña')
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Reset my password')
+    password = PasswordField('Nueva Contraseña', validators=[DataRequired()])
+    password2 = PasswordField('Confirmar Nueva Contraseña', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Recuperar Contraseña')
 
 class SearchForm(FlaskForm):
     q = StringField("Buscar fletes", validators=[DataRequired()])

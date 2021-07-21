@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from web_app.app.forms import RegistrationForm, EmptyForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm
-from web_app.app.models import User, Post
+from web_app.app.models import User, Post, FletesTransportistas, CargasEmbarcadores
 from werkzeug.urls import url_parse
 from datetime import datetime
 from web_app.config2 import Config
@@ -38,7 +38,10 @@ def register():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
-    posts = user.posts.order_by(Post.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
+    q1 = db.session.query(CargasEmbarcadores).filter(CargasEmbarcadores.user_id==user.id)
+    q2 = db.session.query(FletesTransportistas).filter(FletesTransportistas.user_id==user.id)
+    posts = q1.union(q2)
+    posts = posts.order_by(FletesTransportistas.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
     next_url = url_for('user_bp.user', username=user.username, page=posts.next_num) if posts.has_next else None
     prev_url = url_for('user_bp.user', username=user.username, page=posts.prev_num) if posts.has_prev else None
     form = EmptyForm()    

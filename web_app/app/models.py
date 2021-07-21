@@ -63,7 +63,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    posts = db.relationship('Post', backref='user', lazy='dynamic')
+    posts = db.relationship('FletesTransportistas', backref='user', lazy='dynamic')
+    posts2 = db.relationship('CargasEmbarcadores', backref='user', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -134,7 +135,40 @@ class Post(SearchableMixin, db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
+class FletesTransportistas(SearchableMixin, db.Model):
+    __tablename__ = 'fletestransportistas'
+    __searchable__ = ['origen', 'destino', 'descripcion']
+    id = db.Column(db.Integer, primary_key=True)
+    origen = db.Column(db.String(140))
+    destino = db.Column(db.String(140))
+    equipo = db.Column(db.String(140), default=None)
+    precio_total_deseado = db.Column(db.Float, default=None)
+    precio_por_unidad_deseado = db.Column(db.Float, default=None)
+    descripcion = db.Column(db.String(140))
+    contacto = db.Column(db.String(140), default=None)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    def __repr__(self):
+        return '<FletesTransportistas {}>'.format(self.descripcion)
+
+
+class CargasEmbarcadores(SearchableMixin, db.Model):
+    __tablename__ = 'cargasembarcadores'
+    __searchable__ = ['origen', 'destino', 'descripcion']
+    id = db.Column(db.Integer, primary_key=True)
+    origen = db.Column(db.String(140))
+    destino = db.Column(db.String(140))
+    equipo_solicitado = db.Column(db.String(140), default=None)   #caja seca, redilas, plataforma, etc
+    precio_total_ofertado = db.Column(db.Float, default=None)
+    precio_por_unidad_ofertado = db.Column(db.Float, default=None)
+    descripcion = db.Column(db.String(140))
+    contacto = db.Column(db.String(140), default=None)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<CargasEmbarcadores {}>'.format(self.descripcion)
     
     
 
