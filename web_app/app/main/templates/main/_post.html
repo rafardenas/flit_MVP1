@@ -8,7 +8,7 @@
           <th></th>
           <th>Origen</th>
           <th>Destino</th>
-          {%if post.equipo_solicitado%}
+          {%if not post.equipo_solicitado%}
             <th>Equipo solicitado</th>
             <th>Carga</th>
             <th>Total a pagar:</th>
@@ -30,14 +30,14 @@
             </td>
             <td>{{ post.origen }}</td>
             <td>{{ post.destino }}</td>
-            {%if post.equipo_solicitado%}
+            {%if not post.equipo_solicitado%}
                 <td>{{ post.equipo_solicitado }}</td>
                 <td>{{ post.carga }}</td>
             {%else%}
             <td>{{ post.equipo }}</td>
             {%endif%}
 
-            {%if post.equipo_solicitado%}
+            {%if not post.equipo_solicitado%}
             <td>${{ post.precio_total_ofertado }}</td>
             {%else%}
             <td>${{ post.precio_total_deseado }}</td>
