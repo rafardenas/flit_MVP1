@@ -26,8 +26,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('main_bp.index') }}">Inicio</a></li>
-                    <li><a href="{{ url_for('main_bp.transportistas') }}">Transportistas</a></li>
-                    <li><a href="{{ url_for('main_bp.embarcadores') }}">Embarcadores</a></li>
+                    <li><a href="{{ url_for('main_bp.transportistas') }}">Para Transportistas</a></li>
+                    <li><a href="{{ url_for('main_bp.embarcadores') }}">Para Embarcadores</a></li>
                 </ul>
                 {% if g.search_form %}
                 <form class="navbar-form navbar-left" method="get" action="{{ url_for('main_bp.search') }}">
