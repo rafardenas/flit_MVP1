@@ -5,14 +5,65 @@
 {% block app_content %}
     <div class='container cta'>    
     <div class="header-content">
-        <h1>No viajes vacío</h1>
-        <h1>Consigue cargas, fácil</h1>
+        <h1>No viajes vacío.</h1>
+        <h1>Consigue cargas, fácil.</h1>
         <div class='buttons'>
-            <a class="btn btn-primary cta" href="{{ url_for('main_bp.transportistas') }}" role="button">Transportista, consigue fletes!</a>
+            <a class="btn btn-primary cta" href="{{ url_for('main_bp.transportistas') }}" role="button">Transportista, carga!</a>
             <a class="btn btn-primary cta" href="{{ url_for('main_bp.embarcadores') }}" role="button">Embarcador, envía!</a>
         </div>
     </div>
     </div>
-    <br>
-    <h1>To do: Pagina de inicio</h1>
+
+    <section class="promote">
+        Encontrar carga nunca había sido tan facil
+        <div class="sub-promote">
+            Conectamos transportistas con embarcadores para hacer el proceso de encontrar cargas sencillo y rápido
+        </div>
+    </section>
+
+    <section class="reasons">
+        <div class="reason 1">
+            <div class="reason-title">Rápido</div>
+            <div class="reason-more">
+                Oferta tus cajas vacias o tus cargas en menos de dos minutos.
+            </div>
+        </div>
+        <div class="reason 2">
+            <div class="reason-title">Tus cuotas</div>
+            <div class="reason-more">
+                No mas intermediarios que inflan el precio del flete, haz solo tratos directos.
+            </div>
+        </div>
+        <div class="reason 3">
+            <div class="reason-title">Cómodo</div>
+            <div class="reason-more">
+                Entre mas cargas haya, más probable que duermas en casa esta noche.
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-lists">
+                <ul>
+                    <li class="list-head">AYUDA</li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Ayúdanos a mejorar!</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="static/img/facebook.svg" alt="" /></a>
+        </div>
+        
+        
+        <div class="divider"></div>
+
+        &copy; <em id="date"></em>Flit 2021
+        <br>
+        <br>
+        <br>
+</footer>
+
+
 {%- endblock %}

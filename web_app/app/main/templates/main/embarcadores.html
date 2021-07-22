@@ -3,12 +3,13 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+    <img src="static/img/como-funciona-embarcador.png" alt="como como-funciona-embarcador" class="info">
     <br>
     {% if current_user.username %}
-    <h1>Hola, {{ current_user.username }}!</h1>
-    <h3>Consigue transporte para tus cargas, ¿qué quieres embarcar hoy?</h3>
+    <!--<h1>Hola, {{ current_user.username }}!</h1>
+    <h3>Consigue transporte para tus cargas, ¿qué quieres embarcar hoy?</h3>-->
     {% else %}
-    <h3>Inicia sesión para ofertar tus cargas</h3>
+    <!--<h3>Inicia sesión para ofertar tus cargas</h3>-->
     {% endif %}
     <hr>
     {% if form %}
@@ -33,7 +34,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6">
-                {{ wtf.form_field(form.descripcion, class='form-control', placeholder='Se necesita equipo de seguridad...') }}
+                {{ wtf.form_field(form.descripcion, class='form-control', placeholder='\"Se necesita equipo de seguridad para entrar a la planta...\"') }}
             </div>
             <div class="form-group col-md-6">
                 {{ wtf.form_field(form.carga, class='form-control', placeholder='Mercancía, Acero, Combustible') }}
