@@ -3,6 +3,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+    <section class="index">
     <div class='container cta'>    
     <div class="header-content">
         <h1>No viajes vacío.</h1>
@@ -41,29 +42,10 @@
             </div>
         </div>
     </section>
-    <div class="divider"></div>
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-lists">
-                <ul>
-                    <li class="list-head">AYUDA</li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Ayúdanos a mejorar!</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="social-icons">
-            <a href="#"><img src="static/img/facebook.svg" alt="" /></a>
-        </div>
-        
-        
-        <div class="divider"></div>
-
-        &copy; <em id="date"></em>Flit 2021
-        <br>
-        <br>
-        <br>
-</footer>
+    </section>
+    <br>
+    <br>
+    
 
 
 {%- endblock %}

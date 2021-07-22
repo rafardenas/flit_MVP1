@@ -4,69 +4,91 @@
     {{super()}}
     <link rel="shortcut icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png')}} ">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/base.css') }}">
-{% endblock %}
-
-
-
-{% block title %}
+    {% endblock %}
+    
+    
+    
+    {% block title %}
     {% if title %}{{ title }} - Flit{% else %}Flit - Carga, siempre{% endif %}
-{% endblock %}
-
-{% block navbar %}
-    <nav class="navbar navbar-light" style="background-color: #304850;">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle='collapse' data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('main_bp.index') }}">Flit</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('main_bp.index') }}">Inicio</a></li>
-                    <li><a href="{{ url_for('main_bp.transportistas') }}">Para Transportistas</a></li>
-                    <li><a href="{{ url_for('main_bp.embarcadores') }}">Para Embarcadores</a></li>
-                </ul>
-                {% if g.search_form %}
-                <form class="navbar-form navbar-left" method="get" action="{{ url_for('main_bp.search') }}">
-                    <div class='form-group'>
-                        {{ g.search_form.q(size=20, class='form-control', placeholder = g.search_form.q.label.text) }}
-                    </div>
-                </form>
-                {% endif %}
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('auth_bp.login') }}">Iniciar Sesión</a></li>
-                    <li><a href="{{ url_for('user_bp.register') }}">Regístrate</a></li>
-
-                    {% else %}
-                    <li><a href="{{ url_for('user_bp.user', username=current_user.username) }}">Perfil</a></li>
-                    <li><a href="{{ url_for('auth_bp.logout') }}">Salir</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+    {% endblock %}
+    {% block navbar %}
+    
+    <nav class="navbar navbar-default" style="background-color: #304850;">
+        <div class="container fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle=collapse data-target="#main-nav" aria-controls="#main-nav">
+                <span class="icon-bar" style="color: white;"></span><span class="icon-bar" style="color: white;"></span><span class="icon-bar" style="color: white;"></span>
+            </button>
         </div>
+        <!--nav bar items-->
+        <a class="navbar-brand" href="{{ url_for('main_bp.index') }}" style="color: white;">Flit</a>
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('main_bp.index') }}">Inicio</a></li>
+                <li><a href="{{ url_for('main_bp.transportistas') }}">Para Transportistas</a></li>
+                <li><a href="{{ url_for('main_bp.embarcadores') }}">Para Embarcadores</a></li>
+            </ul>
+            {% if g.search_form %}
+            <form class="navbar-form navbar-left" method="get" action="{{ url_for('main_bp.search') }}">
+                <div class='form-group'>
+                    {{ g.search_form.q(size=20, class='form-control', placeholder = g.search_form.q.label.text) }}
+                </div>
+            </form>
+            {% endif %}
+            
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_anonymous %}
+                <li><a href="{{ url_for('auth_bp.login') }}">Iniciar Sesión</a></li>
+                <li><a href="{{ url_for('user_bp.register') }}">Regístrate</a></li>
+                
+                {% else %}
+                <li><a href="{{ url_for('user_bp.user', username=current_user.username) }}">Perfil</a></li>
+                <li><a href="{{ url_for('auth_bp.logout') }}">Salir</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
     </nav>
-{% endblock %}
-
-{% block content %}
+    {% endblock %}
+    {% block content %}
     <div class='container'>
-
+        
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %}
+        {% for message in messages %}
+        <div class="alert alert-info" role="alert">{{ message }}</div>
+        {% endfor %}
         {% endif %}
         {% endwith %}
-
+        
         {# application content needs to be provided in the app_content block #}
     </div>
     <div class='container content'>
         {% block app_content %}{% endblock %}   
     </div>
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-lists">
+                <ul>
+                    <li class="list-head">AYUDA</li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Ayúdanos a mejorar!</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <div class="social-icons">
+            <a href="#"><img src="static/img/facebook.svg" alt="" /></a>
+        </div>    
+        <div class="copy-r">
+            Copyright &copy; <em id="date"></em>Flit 2021
+        </div>
+
+    </footer>
+
 {% endblock %}
 
 {% block scripts %}
