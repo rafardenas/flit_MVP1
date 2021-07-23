@@ -1,54 +1,54 @@
 <!--subtemplate for every post-->
 
-
 <div class="container">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Origen</th>
-          <th>Destino</th>
-          {%if not post.equipo_solicitado%}
-            <th>Equipo disponible</th>
-            <th>Total a pagar:</th>
-            {%else%}
-            <th>Equipo solicitado</th>
-            <th>Tipo de Carga</th>
-            <th>Total a cobrar:</th>
-          {%endif%}
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <td>
-                <a href="{{ url_for('user_bp.user', username=post.user.username) }}">
-                {{ post.user.username }}       
-                </a>
-                @
-                {{ post.timestamp.strftime("%d/%m/%y %H:%M") }}
-            </td>
-            <td>{{ post.origen }}</td>
-            <td>{{ post.destino }}</td>
-            {%if not post.equipo_solicitado%}
-                <td>{{ post.equipo }}</td>
-            {%else%}
-            <td>{{ post.carga }}</td>
-            <td>{{ post.equipo_solicitado }}</td>
-            {%endif%}
-
-            {%if not post.equipo_solicitado%}
-            <td>${{ post.precio_total_deseado }}</td>
-            {%else%}
-            <td>${{ post.precio_total_ofertado }}</td>
-            {%endif%}
-            
-            <td><a href="#"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
-                Más Información
-              </button></td></a>
-        </tr>
-      </tbody>
+<div id="no-more-tables">
+    <table class="table col-sm-10 table-hover">
+        <thead class="cf">
+            <tr>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    {%if not post.equipo_solicitado%}
+                      <th>Equipo disponible</th>
+                      <th>Total a pagar:</th>
+                    {%else%}
+                      <th>Equipo solicitado</th>
+                      <th>Tipo de Carga</th>
+                      <th>Total a cobrar:</th>
+                    {%endif%}
+                    <th>     </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-title= "Usuario">
+                    <a href="{{ url_for('user_bp.user', username=post.user.username) }}">
+                    {{ post.user.username }}       
+                    </a>
+                    @
+                    {{ post.timestamp.strftime("%d/%m/%y %H:%M") }}
+                </td>
+                <td data-title="Origen">{{ post.origen }}</td>
+                <td data-title="Destino">{{ post.destino }}</td>
+                {%if not post.equipo_solicitado%}
+                    <td data-title="Equipo disponible">{{ post.equipo }}</td>
+                {%else%}
+                <td data-title="Tipo de Carga">{{ post.carga }}</td>
+                <td data-title="Equipo Solicitado">{{ post.equipo_solicitado }}</td>
+                {%endif%}
+    
+                {%if not post.equipo_solicitado%}
+                <td data-title= "Total a cobrar:">${{ post.precio_total_deseado }}</td>
+                {%else%}
+                <td data-title="Total a pagar:">${{ post.precio_total_ofertado }}</td>
+                {%endif%}
+                
+                <td data-title="     "><a href="#"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
+                    Más Información
+                  </button></td></a>
+            </tr>
+        </tbody>
     </table>
-  </div>
-
-
+</div>
+</div>

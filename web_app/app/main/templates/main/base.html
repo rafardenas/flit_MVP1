@@ -16,8 +16,8 @@
     <nav class="navbar navbar-default" style="background-color: #304850;">
         <div class="container fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle=collapse data-target="#main-nav" aria-controls="#main-nav">
-                <span class="icon-bar" style="color: white;"></span><span class="icon-bar" style="color: white;"></span><span class="icon-bar" style="color: white;"></span>
+            <button type="button" class="navbar-toggle" data-toggle=collapse data-target="#main-nav" aria-controls="#main-nav" style="color: none;">
+                <span class="icon-bar" style="background-color: white;"></span><span class="icon-bar" style="background-color: white;"></span><span class="icon-bar" style="background-color: white;"></span>
             </button>
         </div>
         <!--nav bar items-->
@@ -49,8 +49,11 @@
         </div>
     </div>
     </nav>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     {% endblock %}
     {% block content %}
+    
     <div class='container'>
         
         {% with messages = get_flashed_messages() %}
@@ -67,7 +70,6 @@
         {% block app_content %}{% endblock %}   
     </div>
 
-
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-lists">
@@ -79,14 +81,14 @@
             </div>
         </div>
         <div class="divider"></div>
-
-        <div class="social-icons">
+        <!--
+        <div class="social-icons"></div>
             <a href="#"><img src="static/img/facebook.svg" alt="" /></a>
         </div>    
+        -->
         <div class="copy-r">
             Copyright &copy; <em id="date"></em>Flit 2021
         </div>
-
     </footer>
 
 {% endblock %}
