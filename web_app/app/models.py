@@ -172,5 +172,10 @@ class CargasEmbarcadores(SearchableMixin, db.Model):
     def __repr__(self):
         return '<CargasEmbarcadores {}>'.format(self.descripcion)
     
-    
+class ContactTable(db.Model):
+    __tablename__ = 'contacto'
+    id = db.Column(db.Integer, primary_key=True)
+    asunto = db.Column(db.String(140))
+    body = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 

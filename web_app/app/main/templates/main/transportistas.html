@@ -7,15 +7,28 @@
 
 
 {% block app_content %}
-    <img src="static/img/como-funciona-transportista.png" alt="como como-funciona-transportista" class="info">
-    <br>
+    <div class="container">
+        <section class="como-f"> 
+            <h1 style="color: #f65335; text-align: center; padding: 20px 20px;">¿Cómo funciona?</h1>
+        
+                <div class="steps">
+                    <div class="step"><img src="static/img/paso1_tr.png" alt="Hulu" class="logo" /></div>
+                    <div class="step"><img src="static/img/paso2_tr.png" alt="Hulu" class="logo" /></div>
+                    <div class="step"><img src="static/img/paso3_tr.png" alt="Hulu" class="logo" /></div>
+                </div>
+        </section>
+        
+        <br>
+            <a href = "#form_tr" ><h3 style="color: #333;; text-align: center; font-size: 17px; font-style: bold; text-transform: uppercase; font-weight: 400;">   Oferta tus cajas vacías y consigue carga fácil y rápido   </h3>
+            </a>
+        </div>
     {% if current_user.username %}
     <h1>Hola, {{ current_user.username }}!</h1>
-    <!--<h3>Oferta tus cajas vacías y consigue carga fácil y rápido</h3>-->
     {% else %}
     <!--<h3>Inicia sesión para ofertar tus cajas vacías</h3>-->
     {% endif %}
     <hr>
+    <a id="form_tr"></a>
     {% if form %}
     <form action="" method="post">
         {{ form.csrf_token() }}
@@ -52,7 +65,7 @@
 
 
 
-    <h1 style="text-align: center;">Cargas disponibles</h1>
+    <h1 style="text-align: center;">Cargas para ti:</h1>
     <br>
     <p class="card-text" >
         {% for post in posts %}

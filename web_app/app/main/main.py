@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request, g
 from flask.globals import current_app
 from flask_login import current_user, login_user, logout_user, login_required
-from web_app.app.forms import SearchForm, PostTransportistas, PostEmbarcadores    
-from web_app.app.models import FletesTransportistas, CargasEmbarcadores
+from web_app.app.forms import SearchForm, PostTransportistas, PostEmbarcadores, ContactForm    
+from web_app.app.models import FletesTransportistas, CargasEmbarcadores, ContactTable
 from werkzeug.urls import url_parse
 from web_app.config2 import Config
 from web_app.app import db
@@ -71,7 +71,7 @@ def embarcadores():
         post = CargasEmbarcadores(origen=form.origen.data, destino=form.destino.data, equipo_solicitado=form.equipo_solicitado.data, \
             precio_total_ofertado=form.precio_total_ofertado.data, precio_por_unidad_ofertado=form.precio_por_unidad_ofertado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user=current_user)
-        print(current_user)
+
         db.session.add(post)
         db.session.commit()
         flash("Listo, en poco tiempo encontrarás un transportista")
@@ -82,7 +82,16 @@ def embarcadores():
     prev_url = url_for('main_bp.embarcadores', page=posts.prev_num) if posts.has_prev else None
     return render_template('main/embarcadores.html', title='Envía tu mercancía, facil', posts=posts.items, next_url=next_url, prev_url=prev_url, form=form)
 
-
+@main_bp.route('/contacto', methods=['GET', 'POST'])
+def contacto():
+    form = ContactForm()
+    if form.validate_on_submit():
+        feedback = ContactTable(asunto=form.asunto.data, body=form.body.data)
+        db.session.add(feedback)
+        db.session.commit()
+        flash("Gracias por tus comentarios!")
+        return redirect(url_for('main_bp.contacto'))
+    return render_template('main/contacto.html', title='Contáctanos', form=form)
 
 @main_bp.before_app_request
 def before_request():
@@ -103,3 +112,13 @@ def search():
         if total > page * current_app.config['POSTS_PER_PAGE'] else None
     prev_url = url_for('.search', q=g.search_form.q.data, page=page-1) if page > 1 else None
     return render_template('main/search.html', title = 'Buscar Fletes', posts=posts, next_url=next_url, prev_url=prev_url)
+
+
+@main_bp.route('/posts/<role>/<post_id>')
+def posts(role, post_id):
+    if role== "cargasembarcadores":
+        oferta = CargasEmbarcadores.query.filter_by(id=post_id).first_or_404()
+    elif role =="fletestransportistas":
+        oferta = FletesTransportistas.query.filter_by(id=post_id).first_or_404()
+        print(oferta.id)
+    return render_template('main/oferta.html', oferta=oferta)

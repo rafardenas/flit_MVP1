@@ -73,6 +73,11 @@ class PostEmbarcadores(FlaskForm):
     submit = SubmitField("Publicar!")
 
 
+class ContactForm(FlaskForm):
+    asunto = StringField("Asunto", validators=[DataRequired()])
+    body = TextAreaField("Dudas, quejas o sugerencias", validators=[DataRequired()])
+    submit = SubmitField("Enviar")
+
 
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

@@ -44,7 +44,7 @@
                 <td data-title="Total a pagar:">${{ post.precio_total_ofertado }}</td>
                 {%endif%}
                 
-                <td data-title="     "><a href="#"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off">
+                <td data-title="     "><a href="{{ url_for('main_bp.posts', role=post.__tablename__, post_id=post.id) }}"><button type="button" class="btn btn-success"  aria-pressed="false" autocomplete="off">
                     Más Información
                   </button></td></a>
             </tr>
