@@ -39,3 +39,7 @@ position: absolute;
 bottom: 0;
 right: 0;
 ```
+
+**Pushing footer down**
+
+[link](https://stackoverflow.com/questions/10099422/flushing-footer-to-bottom-of-the-page-twitter-bootstrap/36385654#36385654)

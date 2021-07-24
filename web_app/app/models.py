@@ -146,7 +146,7 @@ class FletesTransportistas(SearchableMixin, db.Model):
     precio_total_deseado = db.Column(db.Float, default=None)
     precio_por_unidad_deseado = db.Column(db.Float, default=None)
     descripcion = db.Column(db.String(140))
-    contacto = db.Column(db.String(140), default=None)
+    contacto = db.Column(db.String(140), default="Sin más información")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
@@ -160,12 +160,12 @@ class CargasEmbarcadores(SearchableMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     origen = db.Column(db.String(140))
     destino = db.Column(db.String(140))
-    equipo_solicitado = db.Column(db.String(140), default="No info")   #caja seca, redilas, plataforma, etc
-    carga = db.Column(db.String(140), default="No info")
+    equipo_solicitado = db.Column(db.String(140), default="Sin más información")   #caja seca, redilas, plataforma, etc
+    carga = db.Column(db.String(140), default="Sin más información")
     precio_total_ofertado = db.Column(db.Float, default=None)
     precio_por_unidad_ofertado = db.Column(db.Float, default=None)
     descripcion = db.Column(db.String(140))
-    contacto = db.Column(db.String(140), default=None)
+    contacto = db.Column(db.String(140), default="Sin más información")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 

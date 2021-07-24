@@ -3,14 +3,65 @@
 
 
 {% block app_content %}
-    
-    <div class="row">
-        <div class="form-group col-md-6">
-            {{ oferta.id }}
+
+        <div class="container">
+            <div class="col-md-5 col-md-offset-1">
+                    <div class="row">
+
+                <table class="table table-oferta table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Autor: {{oferta.user.username}}</th>
+                        <th>{{oferta.timestamp.strftime("%d/%m/%y %H:%M")}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Origen</th>
+                        <td>{{oferta.origen}}</td>
+                    </tr>
+                    <tr>
+                        <th>Destino</th>
+                        <td>{{oferta.destino}}</td>
+                    </tr>
+                    {%if not oferta.equipo_solicitado%}
+                    <tr>
+                        <th>Equipo disponible</th>
+                        <td>{{oferta.equipo}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total a pagar</th>
+                        <td>{{oferta.precio_total_deseado}}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <th>Equipo solicitado</th>
+                        <td>{{oferta.equipo_solicitado}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo de carga</th>
+                        <td>{{oferta.carga}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total a cobrar</th>
+                        <td>{{oferta.precio_por_unidad_ofertado}}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <th>Más información</th>
+                        <td>{{oferta.descripcion}}</td>
+                    </tr>
+                    <tr>
+                        <th>Contacto</th>
+                        <td>{{oferta.contacto}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-        <div class="form-group col-md-6">
-            {{ oferta.id }}
     </div>
+
 
 
 {% endblock %}
