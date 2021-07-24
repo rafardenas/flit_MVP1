@@ -93,10 +93,10 @@ def contacto():
         return redirect(url_for('main_bp.contacto'))
     return render_template('main/contacto.html', title='Contáctanos', form=form)
 
-@main_bp.before_app_request
-def before_request():
-    if current_user.is_authenticated:
-        g.search_form = SearchForm()
+#@main_bp.before_app_request
+#def before_request():
+#    if current_user.is_authenticated:
+#        g.search_form = SearchForm()
 
 @main_bp.route('/search')
 @login_required
