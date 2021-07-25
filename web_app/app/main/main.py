@@ -43,7 +43,7 @@ def transportistas():
     if form.validate_on_submit():
         if not current_user.is_authenticated:
             flash("Regístrate para encontrar cargas!")
-            return redirect(url_for('user_bp.register'))
+            return redirect(url_for('user_bp.transportisas'))
         post = FletesTransportistas(origen=form.origen.data, destino=form.destino.data, equipo=form.equipo.data, \
             precio_total_deseado=form.precio_total_deseado.data, precio_por_unidad_deseado=form.precio_por_unidad_deseado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user_id=current_user.id)
@@ -67,7 +67,7 @@ def embarcadores():
     if form.validate_on_submit():
         if not current_user.is_authenticated:
             flash("Regístrate para encontrar transportistas!")
-            return redirect(url_for('user_bp.register'))
+            return redirect(url_for('user_bp.embarcadores'))
         post = CargasEmbarcadores(origen=form.origen.data, destino=form.destino.data, equipo_solicitado=form.equipo_solicitado.data, \
             precio_total_ofertado=form.precio_total_ofertado.data, precio_por_unidad_ofertado=form.precio_por_unidad_ofertado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user=current_user)
