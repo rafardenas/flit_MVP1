@@ -58,7 +58,7 @@ followers = db.Table('followers',
             db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
             )
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -124,7 +124,7 @@ class User(db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
-class Post(SearchableMixin, db.Model):
+class Post(db.Model):
     __tablename__ = 'post'
     __searchable__ = ['body']
     id = db.Column(db.Integer, primary_key=True)
@@ -154,7 +154,7 @@ class FletesTransportistas(db.Model):
         return '<FletesTransportistas {}>'.format(self.descripcion)
 
 
-class CargasEmbarcadores(db.Model):
+class CargasEmbarcadores(SearchableMixin, db.Model):
     __tablename__ = 'cargasembarcadores'
     __searchable__ = ['origen', 'destino', 'descripcion']
     id = db.Column(db.Integer, primary_key=True)
