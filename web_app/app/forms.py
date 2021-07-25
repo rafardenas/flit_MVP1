@@ -1,12 +1,19 @@
 from typing import Text
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from web_app.app.models import User
 from flask import request
 
 
 #encapsulate each of the forms in one class
+def number_validator(form, field):
+    if isinstance(field.data, int) or isinstance(field.data, float):
+        pass
+    else:
+        raise ValidationError('Por favor introduce un número')
+       
+
 
 class LoginForm(FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired()])    #validators argument is to check that field is not empty
@@ -24,7 +31,7 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError("Por favor usa otro nombre de usuario")
+            raise ValidationError("Por favor usa otro nombre de usuario, este ya existe")
     
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
@@ -50,27 +57,27 @@ class EmptyForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class PostTransportistas(FlaskForm):
-    origen = StringField("Origen", validators=[DataRequired()])
-    destino = StringField("Destino", validators=[DataRequired()])
-    equipo = StringField("Equipo Disponible", validators=[DataRequired()])
-    precio_total_deseado = StringField("Costo total a cobrar", validators=[DataRequired()])
-    precio_por_unidad_deseado = StringField("Costo por tonelada a cobrar")
-    descripcion = TextAreaField("Información extra", validators=[Length(min=0, max=140)])
+    origen = StringField("Origen", validators=[DataRequired("Campo obligatorio")])
+    destino = StringField("Destino", validators=[DataRequired("Campo obligatorio")])
+    equipo = StringField("Equipo Disponible", validators=[DataRequired("Campo obligatorio")])
+    precio_total_deseado = FloatField("Costo total a cobrar", validators=[DataRequired('Por favor introduce un número'), number_validator])
+    precio_por_unidad_deseado = FloatField("Costo por tonelada a cobrar", validators=[DataRequired('Por favor introduce un número'), number_validator])
+    descripcion = TextAreaField("Información extra", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')
     contacto = StringField("Contacto preferido")
-    submit = SubmitField("Publicar!")
+    submit = SubmitField("Encontrar carga!")
 
 class PostEmbarcadores(FlaskForm):
-    origen = StringField("Origen", validators=[DataRequired()])
-    destino = StringField("Destino", validators=[DataRequired()])
-    equipo_solicitado = StringField("Equipo a Solicitar", validators=[DataRequired()])
+    origen = StringField("Origen", validators=[DataRequired("Campo obligatorio")])
+    destino = StringField("Destino", validators=[DataRequired("Campo obligatorio")])
+    equipo_solicitado = StringField("Equipo a Solicitar", validators=[DataRequired("Campo obligatorio")])
     carga = StringField("Carga", validators=[DataRequired()])
-    precio_total_ofertado = StringField("Total a Pagar", validators=[DataRequired()])
-    precio_por_unidad_ofertado = StringField("Precio por Tonelada a Pagar")
-    descripcion = TextAreaField("Información extra, permisos necesarios, consideraciones especiales", validators=[Length(min=0, max=140)])
+    precio_total_ofertado = FloatField("Total a Pagar", validators=[DataRequired('Por favor introduce un número'), number_validator])
+    precio_por_unidad_ofertado = FloatField("Precio por Tonelada a Pagar", validators=[DataRequired('Por favor introduce un número'), number_validator])
+    descripcion = TextAreaField("Información extra, permisos necesarios, consideraciones especiales", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')
     contacto = StringField("Forma de contacto")
-    submit = SubmitField("Publicar!")
+    submit = SubmitField("Encontrar transportista!")
 
 
 class ContactForm(FlaskForm):

@@ -43,3 +43,9 @@ right: 0;
 **Pushing footer down**
 
 [link](https://stackoverflow.com/questions/10099422/flushing-footer-to-bottom-of-the-page-twitter-bootstrap/36385654#36385654)
+
+**Centering col-md-5**
+[link](https://stackoverflow.com/questions/33379802/bootstrap-centering-col-md-5)
+
+**Change rows for columns bootstrap**
+[link](https://stackoverflow.com/questions/28046506/bootstrap-responsive-table-change-rows-with-column)

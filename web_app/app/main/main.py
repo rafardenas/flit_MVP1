@@ -47,8 +47,10 @@ def transportistas():
         post = FletesTransportistas(origen=form.origen.data, destino=form.destino.data, equipo=form.equipo.data, \
             precio_total_deseado=form.precio_total_deseado.data, precio_por_unidad_deseado=form.precio_por_unidad_deseado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user_id=current_user.id)
-        print(form.__dict__)
-        print(post.__dict__)
+        print(isinstance(form.precio_total_deseado.data, int))
+        print("tipo", type(int(form.precio_total_deseado.data)))
+        #print(form.__dict__)
+        #print(post.__dict__)
         db.session.add(post)
         db.session.commit()
         flash("Listo, en poco tiempo alguien te contactará")
