@@ -40,17 +40,14 @@ def index():
 @main_bp.route('/transportistas', methods=['GET', 'POST'])  
 def transportistas():
     form = PostTransportistas()
-    print("sample")
     if form.validate_on_submit():
         print(form.__dict__)
         if not current_user.is_authenticated:
             flash("Regístrate para encontrar cargas!")
-            return redirect(url_for('user_bp.transportisas'))
+            return redirect(url_for('user_bp.register'))
         post = FletesTransportistas(origen=form.origen.data, destino=form.destino.data, equipo=form.equipo.data, \
             precio_total_deseado=form.precio_total_deseado.data, precio_por_unidad_deseado=form.precio_por_unidad_deseado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user_id=current_user.id)
-        print('post')
-        #print(post.__dict__)
         db.session.add(post)
         db.session.commit()
         flash("Listo, en poco tiempo alguien te contactará")
@@ -64,7 +61,6 @@ def transportistas():
 
 @main_bp.route('/embarcadores', methods=['GET', 'POST'])  
 def embarcadores():
-    #TODO: change the query to the correct table
     form = PostEmbarcadores()
     if form.validate_on_submit():
         if not current_user.is_authenticated:
@@ -127,13 +123,15 @@ def posts(role, post_id):
     if request.method == 'POST':
         db.session.delete(oferta)
         db.session.commit()
-        if role== "cargasembarcadores":
+        if role == "cargasembarcadores":
+            flash("Tu anuncio se ha borrado correctamente")
             return redirect(url_for('.transportistas'))
-        elif role =="fletestransportistas":
-            return redirect(url_for('.transportistas'))
+        elif role == "fletestransportistas":
+            flash("Tu anuncio se ha borrado correctamente")
+            return redirect(url_for('.embarcadores'))
 
     
-
+#TODO - implement edit
 @main_bp.route('/edit_post', methods=['GET', 'POST'])
 def edit_post():
     if request.method == 'POST':

@@ -29,7 +29,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash("User registered succesfully!")
+        flash("Usuario registrado!")
         return redirect(url_for('auth_bp.login'))
     return render_template('user/register.html', title = "Regístrate", form=form)
 
@@ -40,8 +40,12 @@ def user(username):
     page = request.args.get('page', 1, type=int)
     q1 = db.session.query(CargasEmbarcadores).filter(CargasEmbarcadores.user_id==user.id)
     q2 = db.session.query(FletesTransportistas).filter(FletesTransportistas.user_id==user.id)
-    posts = q1.union(q2)
-    posts = posts.order_by(FletesTransportistas.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
+    posts = q1.union(q2).paginate(page, Config.POSTS_PER_PAGE, False)
+    posts = q1.paginate(page, Config.POSTS_PER_PAGE, False)
+    print(posts.items[0].destino)
+    posts = q2.paginate(page, Config.POSTS_PER_PAGE, False)
+    print(posts.items[0].destino)
+    #posts = posts.order_by(FletesTransportistas.timestamp.desc())
     next_url = url_for('user_bp.user', username=user.username, page=posts.next_num) if posts.has_next else None
     prev_url = url_for('user_bp.user', username=user.username, page=posts.prev_num) if posts.has_prev else None
     form = EmptyForm()    
@@ -73,14 +77,14 @@ def follow(username):
     if form.validate_on_submit():
         user = User.query.filter_by(username=username).first()
         if user is None:
-            flash('User {} not found'.format(username))
+            flash('Usuario {} no encontrado'.format(username))
             return redirect(url_for('main_bp.index'))
         if user == current_user:
-            flash('You cannot follow yourself!')
+            flash('No te puedes seguir a ti mismo')
             return redirect(url_for('user_bp.user', username=username))
         current_user.follow(user)
         db.session.commit()
-        flash('Now you are following {}'.format(username))
+        flash('Ahora sigues a {}'.format(username))
         return redirect (url_for('user_bp.user', username=username))
     else:
         return redirect(url_for('main_bp.index'))
@@ -94,14 +98,14 @@ def unfollow(username):
     if form.validate_on_submit():
         user = User.query.filter_by(username=username).first()
         if user is None:
-            flash('User {} not found'.format(username))
+            flash('Usuario {} no encontrado'.format(username))
             return redirect(url_for('main_bp.index'))
         if user == current_user:
-            flash('You cannot unfollow yourself!')
+            flash('No te puedes dejar de seguir!')
             return redirect(url_for('user_bp.user', username=username))
         current_user.unfollow(user)
         db.session.commit()
-        flash('You do not follow {} anymore'.format(username))
+        flash('Dejasta de seguir a {}'.format(username))
         return redirect(url_for('user_bp.user', username=username))
     else:
         return redirect(url_for('main_bp.index'))
@@ -118,10 +122,10 @@ def reset_password_request():
         flash(user.username)
         if user:
             send_password_reset_email(user)
-            flash('Check your email for instructions to reset your password')
+            flash('Revisa tu correo para instrucciones sobre como recuperar tu contraseña')
             return redirect(url_for('auth_bp.login'))
         else:
-            flash('No account with that email, try again')
+            flash('Ese email no esta registrado, intentalo de nuevo')
     return render_template('user/reset_password_request.html', title='Restablecer contraseña', form=form)
 
 
