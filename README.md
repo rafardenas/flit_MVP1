@@ -49,3 +49,6 @@ right: 0;
 
 **Change rows for columns bootstrap**
 [link](https://stackoverflow.com/questions/28046506/bootstrap-responsive-table-change-rows-with-column)
+
+
+[link](https://stackoverflow.com/questions/25095591/how-do-i-connect-to-postgresql-using-ssl-from-sqlachemypg8000)
