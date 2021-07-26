@@ -40,16 +40,16 @@ def index():
 @main_bp.route('/transportistas', methods=['GET', 'POST'])  
 def transportistas():
     form = PostTransportistas()
+    print("sample")
     if form.validate_on_submit():
+        print(form.__dict__)
         if not current_user.is_authenticated:
             flash("Regístrate para encontrar cargas!")
             return redirect(url_for('user_bp.transportisas'))
         post = FletesTransportistas(origen=form.origen.data, destino=form.destino.data, equipo=form.equipo.data, \
             precio_total_deseado=form.precio_total_deseado.data, precio_por_unidad_deseado=form.precio_por_unidad_deseado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user_id=current_user.id)
-        print(isinstance(form.precio_total_deseado.data, int))
-        print("tipo", type(int(form.precio_total_deseado.data)))
-        #print(form.__dict__)
+        print('post')
         #print(post.__dict__)
         db.session.add(post)
         db.session.commit()
@@ -73,7 +73,7 @@ def embarcadores():
         post = CargasEmbarcadores(origen=form.origen.data, destino=form.destino.data, equipo_solicitado=form.equipo_solicitado.data, \
             precio_total_ofertado=form.precio_total_ofertado.data, precio_por_unidad_ofertado=form.precio_por_unidad_ofertado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user=current_user)
-
+        
         db.session.add(post)
         db.session.commit()
         flash("Listo, en poco tiempo encontrarás un transportista")

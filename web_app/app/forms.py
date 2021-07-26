@@ -60,7 +60,7 @@ class PostTransportistas(FlaskForm):
     origen = StringField("Origen", validators=[DataRequired("Campo obligatorio")])
     destino = StringField("Destino", validators=[DataRequired("Campo obligatorio")])
     equipo = StringField("Equipo Disponible", validators=[DataRequired("Campo obligatorio")])
-    precio_total_deseado = FloatField("Costo total a cobrar", validators=[DataRequired('Por favor introduce un número'), number_validator])
+    precio_total_deseado = FloatField("Costo total a cobrar", validators=[number_validator])
     precio_por_unidad_deseado = FloatField("Costo por tonelada a cobrar", validators=[DataRequired('Por favor introduce un número'), number_validator])
     descripcion = TextAreaField("Información extra", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')
