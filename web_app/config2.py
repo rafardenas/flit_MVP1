@@ -10,10 +10,10 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     #SQLALCHEMY_DATABASE_URI = 'postgresql://' + os.environ.get('DBUSER') + ':' + os.environ.get('DBPASS') + '@' + os.environ.get('DBSERVER') + '/' + os.environ.get('DBNAME') 
-    SQLALCHEMY_DATABASE_URI= 'postgresql://rafardenas@encuentracargasmx:1Rafiqui#@encuentracargasmx.postgres.database.azure.com:5432/encuentracargasmx_db?sslmode=require'
-    #SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
-    #    'postgres://', 'postgresql://') or \
-    #    'sqlite:///' + os.path.join(basedir, 'app.db')
+    #SQLALCHEMY_DATABASE_URI= 'postgresql://rafardenas@encuentracargasmx:1Rafiqui#@encuentracargasmx.postgres.database.azure.com:5432/encuentracargasmx_db?sslmode=require'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
+        'postgres://', 'postgresql://') or \
+        'sqlite:///' + os.path.join(basedir, 'app.db')
     print(SQLALCHEMY_DATABASE_URI)
     #print(os.environ.get('DATABASE_URL'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
