@@ -116,11 +116,29 @@ def search():
     return render_template('main/search.html', title = 'Buscar Fletes', posts=posts, next_url=next_url, prev_url=prev_url)
 
 
-@main_bp.route('/posts/<role>/<post_id>')
+@main_bp.route('/posts/<role>/<post_id>', methods=['GET', 'POST'])
 def posts(role, post_id):
     if role== "cargasembarcadores":
         oferta = CargasEmbarcadores.query.filter_by(id=post_id).first_or_404()
     elif role =="fletestransportistas":
         oferta = FletesTransportistas.query.filter_by(id=post_id).first_or_404()
-        print(oferta.id)
-    return render_template('main/oferta.html', oferta=oferta)
+    if request.method == 'GET':
+        return render_template('main/oferta.html', oferta=oferta)
+    if request.method == 'POST':
+        db.session.delete(oferta)
+        db.session.commit()
+        if role== "cargasembarcadores":
+            return redirect(url_for('.transportistas'))
+        elif role =="fletestransportistas":
+            return redirect(url_for('.transportistas'))
+
+    
+
+@main_bp.route('/edit_post', methods=['GET', 'POST'])
+def edit_post():
+    if request.method == 'POST':
+        if 'edit' in request.form:
+            print('edit')
+        if 'delete' in request.form:
+            print('delete')
+    return render_template('main/index.html')
