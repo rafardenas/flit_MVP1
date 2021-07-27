@@ -3,15 +3,22 @@
 
 {% block app_content %}
     <br>
-    <br>
-    <h1>Nuevo Usuario</h1>
-    <!--<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
-    <br>
-    <br>
-    <form action="" method = "post">
-    <div class="row">
-        <div class="col-md-4">
-            {{ wtf.quick_form(form) }}
-        </div>
+    <div class="container">
+        <h1>Nuevo Usuario</h1>
+            <fb:login-button 
+                scope="public_profile,email"
+                onlogin="checkLoginState();">
+            </fb:login-button>
+        <!--<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+        <hr>
+        <h4>O,  regístrate:</h4>-->
+        <br>
+        <form action="" method = "post">
+            <div class="row">
+                <div class="col-md-4">
+                    {{ wtf.quick_form(form) }}
+                </div>
+            </div>
+        </form>
     </div>
 {% endblock %}

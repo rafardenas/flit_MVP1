@@ -119,10 +119,9 @@ def reset_password_request():
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        flash(user.username)
         if user:
             send_password_reset_email(user)
-            flash('Revisa tu correo para instrucciones sobre como recuperar tu contraseña')
+            flash('Revisa tu correo para recuperar tu nombre de usuario y para instrucciones sobre como recuperar tu contraseña')
             return redirect(url_for('auth_bp.login'))
         else:
             flash('Ese email no esta registrado, intentalo de nuevo')

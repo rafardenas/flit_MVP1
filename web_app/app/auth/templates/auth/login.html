@@ -2,16 +2,24 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Iniciar Sesión</h1>
-    <div class="row">
-        <div class="col-md-4">
-            {{ wtf.quick_form(form) }}
+    <div class="container">
+        <h1>Iniciar Sesión</h1>
+        <br>
+        <!--<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+        <br>
+        <hr>
+        <h4>O,  regístrate:</h4>-->
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                {{ wtf.quick_form(form) }}
+            </div>
         </div>
+        <br>
+        <p>Nuevo Usuario? <a href="{{ url_for('user_bp.register') }}">Regístrate!</a></p>
+        <p>
+            <a href="{{ url_for('user_bp.reset_password_request') }}">Olvidaste tu nombre de usuario o contraseña?</a>
+        </p>
     </div>
-    <br>
-    <p>Nuevo Usuario? <a href="{{ url_for('user_bp.register') }}">Regístrate!</a></p>
-    <p>
-        <a href="{{ url_for('user_bp.reset_password_request') }}">Olvidaste tu contraseña?</a>
-    </p>
 {% endblock %}
 

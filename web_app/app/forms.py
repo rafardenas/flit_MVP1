@@ -11,7 +11,7 @@ def number_validator(form, field):
     if isinstance(field.data, int) or isinstance(field.data, float):
         pass
     else:
-        raise ValidationError('Por favor introduce un número')
+        raise ValidationError('Por favor introduce un número. Si no lo deseas, coloca cero')
        
 
 
@@ -60,7 +60,7 @@ class PostTransportistas(FlaskForm):
     origen = StringField("Origen", validators=[DataRequired("Campo obligatorio")])
     destino = StringField("Destino", validators=[DataRequired("Campo obligatorio")])
     equipo = StringField("Equipo Disponible", validators=[DataRequired("Campo obligatorio")])
-    precio_total_deseado = FloatField("Costo total a cobrar", validators=[DataRequired('Por favor introduce un número'), number_validator])
+    precio_total_deseado = FloatField("Costo total a cobrar", validators=[number_validator])
     precio_por_unidad_deseado = FloatField("Costo por tonelada a cobrar")
     descripcion = TextAreaField("Información extra", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')
@@ -72,7 +72,7 @@ class PostEmbarcadores(FlaskForm):
     destino = StringField("Destino", validators=[DataRequired("Campo obligatorio")])
     equipo_solicitado = StringField("Equipo a Solicitar", validators=[DataRequired("Campo obligatorio")])
     carga = StringField("Carga", validators=[DataRequired()])
-    precio_total_ofertado = FloatField("Total a Pagar", validators=[DataRequired('Por favor introduce un número'), number_validator])
+    precio_total_ofertado = FloatField("Total a Pagar", validators=[number_validator])
     precio_por_unidad_ofertado = FloatField("Precio por Tonelada a Pagar")
     descripcion = TextAreaField("Información extra, permisos necesarios, consideraciones especiales", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')

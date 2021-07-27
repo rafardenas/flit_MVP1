@@ -13,29 +13,8 @@ main_bp = Blueprint('main_bp', __name__, template_folder='templates')
 @main_bp.route('/', methods=['GET', 'POST'])
 @main_bp.route('/index', methods=['GET', 'POST'])
 def index():    
-    return render_template('main/index.html', title='Inicio')
+    return render_template('main/index.html', title='Carga rápido, ahorra más')
 
-
-"""
-@main_bp.route('/', methods=['GET', 'POST'])
-@main_bp.route('/index', methods=['GET', 'POST'])
-@login_required
-def index():
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Post(body=form.post.data, user=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash("Listing is posted now!")
-        return redirect(url_for('main_bp.index'))
-    page = request.args.get('page', 1, type=int)
-    posts = current_user.followed_posts().paginate(page, Config.POSTS_PER_PAGE, False)   
-    #calling a'all' in the last query triggers the execution, we call 'pagination' here instead
-    next_url = url_for('main_bp.index', page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('main_bp.index', page=posts.prev_num) if posts.has_prev else None
-
-    return render_template('main/index.html', title='Inicio', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
-"""
 
 @main_bp.route('/transportistas', methods=['GET', 'POST'])  
 def transportistas():
@@ -50,7 +29,7 @@ def transportistas():
             contacto=form.contacto.data, user_id=current_user.id)
         db.session.add(post)
         db.session.commit()
-        flash("Listo, en poco tiempo alguien te contactará")
+        flash("Listo, en poco tiempo encontrarás carga")
         return redirect(url_for('main_bp.transportistas'))
     page = request.args.get('page', 1, type=int)
     posts = CargasEmbarcadores.query.order_by(CargasEmbarcadores.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
@@ -67,7 +46,7 @@ def embarcadores():
             flash("Regístrate para encontrar transportistas!")
             return redirect(url_for('user_bp.embarcadores'))
         post = CargasEmbarcadores(origen=form.origen.data, destino=form.destino.data, equipo_solicitado=form.equipo_solicitado.data, \
-            precio_total_ofertado=form.precio_total_ofertado.data, precio_por_unidad_ofertado=form.precio_por_unidad_ofertado.data, descripcion=form.descripcion.data, \
+            carga= form.carga.data, precio_total_ofertado=form.precio_total_ofertado.data, precio_por_unidad_ofertado=form.precio_por_unidad_ofertado.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user=current_user)
         
         db.session.add(post)
@@ -131,7 +110,7 @@ def posts(role, post_id):
             return redirect(url_for('.embarcadores'))
 
     
-#TODO - implement edit
+# @TODO - implement edit
 @main_bp.route('/edit_post', methods=['GET', 'POST'])
 def edit_post():
     if request.method == 'POST':
@@ -140,3 +119,7 @@ def edit_post():
         if 'delete' in request.form:
             print('delete')
     return render_template('main/index.html')
+
+@main_bp.route('/trial', methods=['GET', 'POST'])
+def trial():
+    return render_template('main/trial.html', title='trial')

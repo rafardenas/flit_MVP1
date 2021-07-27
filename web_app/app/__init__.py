@@ -44,8 +44,8 @@ def create_app(config_class=Config):
     app.register_blueprint(user_bp, url_prefix="/user")
     #app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
     #DATABASE_URL = os.environ['DATABASE_URL']
-    #cnx = psycopg2.connect(database='encuentracargasmx_db', user='rafardenas@encuentracargasmx', host='encuentracargasmx.postgres.database.azure.com', password='1Rafiqui#', port='5432')
-    #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    #psycopg2.connect(database='encuentracargasmx_db', user='rafardenas@encuentracargasmx', host='encuentracargasmx.postgres.database.azure.com', password='1Rafiqui#', port='5432', sslmode='require')
+    #psycopg2.connect(C, sslmode='require')
 
     
     if not app.debug and not app.testing:

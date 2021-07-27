@@ -10,10 +10,10 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     #SQLALCHEMY_DATABASE_URI = 'postgresql://' + os.environ.get('DBUSER') + ':' + os.environ.get('DBPASS') + '@' + os.environ.get('DBSERVER') + '/' + os.environ.get('DBNAME') 
-    #SQLALCHEMY_DATABASE_URI= 'postgresql://rafardenas@encuentracargasmx:1Rafiqui#@encuentracargasmx.postgres.database.azure.com:5432/encuentracargasmx_db?sslmode=require'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
-        'postgres://', 'postgresql://') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_DATABASE_URI= 'postgresql://rafardenas@encuentracargasmx:1Rafiqui#@encuentracargasmx.postgres.database.azure.com:5432/encuentracargasmx_db?sslmode=require'
+    #SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
+    #    'postgres://', 'postgresql://') or \
+    #    'sqlite:///' + os.path.join(basedir, 'app.db')
     #print(SQLALCHEMY_DATABASE_URI)
     #print(os.environ.get('DATABASE_URL'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -25,10 +25,11 @@ class Config(object):
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['your-email@example.com']
+    ADMINS = ['rafardenas@gmail.com']
     POSTS_PER_PAGE = 25
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL') or "http://localhost:9200"
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+    API_KEY_SENDGRID = os.environ.get('API_KEY_SENDGRID')
 
 
     

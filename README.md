@@ -52,3 +52,11 @@ right: 0;
 
 
 [link](https://stackoverflow.com/questions/25095591/how-do-i-connect-to-postgresql-using-ssl-from-sqlachemypg8000)
+
+
+[“Mobile” Bootstrap-Navbar not working](https://stackoverflow.com/questions/21956741/mobile-bootstrap-navbar-not-working)
+
+[How to check if an index exists in elasticsearch using a python script and perform exception handling over it?](https://stackoverflow.com/questions/40300231/how-to-check-if-an-index-exists-in-elasticsearch-using-a-python-script-and-perfo)
+
+
+[SendGrid Python](https://github.com/sendgrid/sendgrid-python)

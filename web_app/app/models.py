@@ -143,8 +143,8 @@ class FletesTransportistas(db.Model):
     destino = db.Column(db.String(140))
     equipo = db.Column(db.String(140), default=None)
     helper = db.Column(db.String(140), default=None) #columna para que ambas tablas tengan el mismo numero de columnas y hacer UNION
-    precio_total_deseado = db.Column(db.Float, default=None)
-    precio_por_unidad_deseado = db.Column(db.Float, default=None)
+    precio_total_deseado = db.Column(db.Float, default=0.0)
+    precio_por_unidad_deseado = db.Column(db.Float, default=0.0)
     descripcion = db.Column(db.String(140))
     contacto = db.Column(db.String(140), default="Sin más información")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -162,8 +162,8 @@ class CargasEmbarcadores(SearchableMixin, db.Model):
     destino = db.Column(db.String(140))
     equipo_solicitado = db.Column(db.String(140), default="Sin más información")   #caja seca, redilas, plataforma, etc
     carga = db.Column(db.String(140), default="Sin más información")
-    precio_total_ofertado = db.Column(db.Float, default=None)
-    precio_por_unidad_ofertado = db.Column(db.Float, default=None)
+    precio_total_ofertado = db.Column(db.Float, default=0.0)
+    precio_por_unidad_ofertado = db.Column(db.Float, default=0.0)
     descripcion = db.Column(db.String(140))
     contacto = db.Column(db.String(140), default="Sin más información")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

@@ -41,12 +41,15 @@ PySocks
 python-dateutil 
 python-dotenv==0.18.0
 python-editor==1.0.4
+python-http-client==3.3.2
 pytz 
 regex 
 requests 
 sacremoses==0.0.43
+sendgrid==6.7.1
 six 
-SQLAlchemy 
+SQLAlchemy
+starkbank-ecdsa==1.1.1 
 tqdm 
 typing-extensions 
 urllib3 
