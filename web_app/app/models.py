@@ -1,5 +1,5 @@
 from hashlib import md5
-from datetime import datetime
+from datetime import datetime, timedelta
 from web_app.app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -66,7 +66,7 @@ class User(UserMixin, db.Model):
     posts = db.relationship('FletesTransportistas', backref='user', lazy='dynamic')
     posts2 = db.relationship('CargasEmbarcadores', backref='user', lazy='dynamic')
     about_me = db.Column(db.String(140))
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow() - timedelta(hours=5, minutes=0))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -129,7 +129,7 @@ class Post(db.Model):
     __searchable__ = ['body']
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow() - timedelta(hours=5, minutes=0))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
@@ -147,8 +147,9 @@ class FletesTransportistas(db.Model):
     precio_por_unidad_deseado = db.Column(db.Float, default=0.0)
     descripcion = db.Column(db.String(140))
     contacto = db.Column(db.String(140), default="Sin más información")
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow() - timedelta(hours=5, minutes=0))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comments = db.relationship('CommentsFletesTransportistas', backref='fletestransportistas', lazy='dynamic')
 
     def __repr__(self):
         return '<FletesTransportistas {}>'.format(self.descripcion)
@@ -166,8 +167,9 @@ class CargasEmbarcadores(SearchableMixin, db.Model):
     precio_por_unidad_ofertado = db.Column(db.Float, default=0.0)
     descripcion = db.Column(db.String(140))
     contacto = db.Column(db.String(140), default="Sin más información")
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow() - timedelta(hours=5, minutes=0))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comments = db.relationship('CommentsCargasEmbarcadores', backref='cargasembarcadores', lazy='dynamic')
 
     def __repr__(self):
         return '<CargasEmbarcadores {}>'.format(self.descripcion)
@@ -177,5 +179,24 @@ class ContactTable(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     asunto = db.Column(db.String(140))
     body = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow() - timedelta(hours=5, minutes=0))
+
+class CommentsFletesTransportistas(db.Model):
+    __tablename__ = 'comentariosfletestransportistas'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(300))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    username = db.Column(db.String(300))
+    flete_id = db.Column(db.Integer, db.ForeignKey('fletestransportistas.id'))
+
+class CommentsCargasEmbarcadores(db.Model):
+    __tablename__ = 'comentarioscargasembarcadores'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(300))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow() - timedelta(hours=5, minutes=0))
+    username = db.Column(db.String(300))
+    carga_id = db.Column(db.Integer, db.ForeignKey('cargasembarcadores.id'))
+
+
+    
 

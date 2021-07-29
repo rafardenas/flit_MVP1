@@ -64,7 +64,7 @@ class PostTransportistas(FlaskForm):
     precio_por_unidad_deseado = FloatField("Costo por tonelada a cobrar")
     descripcion = TextAreaField("Información extra", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')
-    contacto = StringField("Contacto preferido")
+    contacto = StringField("Forma de contacto", validators=[DataRequired("Requerido. ¿Cómo pueden contactarte los embarcadores?")])
     submit = SubmitField("Encontrar carga!")
 
 class PostEmbarcadores(FlaskForm):
@@ -76,7 +76,7 @@ class PostEmbarcadores(FlaskForm):
     precio_por_unidad_ofertado = FloatField("Precio por Tonelada a Pagar")
     descripcion = TextAreaField("Información extra, permisos necesarios, consideraciones especiales", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')
-    contacto = StringField("Forma de contacto")
+    contacto = StringField("Forma de contacto", validators=[DataRequired("Requerido. ¿Cómo pueden contactarte los transportistas?")])
     submit = SubmitField("Encontrar transportista!")
 
 
@@ -104,5 +104,9 @@ class SearchForm(FlaskForm):
         if 'csrf_enabled' not in kwargs:
             kwargs['csrf_enabled'] = False
         super(SearchForm, self).__init__(*args, **kwargs)
+
+class Comments(FlaskForm):
+    comment = TextAreaField("", validators=[DataRequired(), Length(min=0, max=300)])
+    submit = SubmitField('Comentar')
 
 

@@ -1,0 +1,25 @@
+
+
+<div class="container">
+    <table class="table col-md-6 table-striped" style="margin-bottom: -2%;">
+        <tbody>
+          <tr>
+            <th scope="user">{{ comment.username }} @ {{ comment.timestamp.strftime("%d/%m/%y %H:%M") }}</th>
+          </tr>
+          <tr>
+            <td scope="comment">{{ comment.body }}</td>
+          </tr>
+        </tbody>
+    </table>
+    
+    {%if comment.username == current_user.username %}
+    <section>
+    <div class="form-group col-md-12  col-md-offset-10" style="margin-top:px;">
+        <form method="POST" action=  "{{ url_for('main_bp.posts', role=oferta.__tablename__, post_id=oferta.id, comment_id=comment.id) }}" value= "delete-comment" >
+            <button type="submit" value= "delete-comment" class="btn btn-danger"  aria-pressed="false" autocomplete="off">
+                Borrar Comentario
+            </button>   
+        </form>
+    {% endif %}
+</section>
+</div>

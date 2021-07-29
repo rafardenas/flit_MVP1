@@ -70,6 +70,47 @@
         </div>
     {% endif %}
 
+    <section>
+        <div class="container comments">
+            <form action=  "{{ url_for('main_bp.posts', role=oferta.__tablename__, post_id=oferta.id) }}" method="POST" value="comment">
+                {{ form.csrf_token() }}
+                <div class="form-row" style="text-align: center; align-items: left">
+                  <div class="form-group col-md-5 col-md-offset-1" >
+                    {{ wtf.form_field(form.comment, class='form-control', placeholder='escribe un comentario') }}
+                  </div>
+                </div>
+                <br>
+                <div>{{ wtf.form_field(form.submit, class='btn btn-primary', placeholder='', style='background-color:#f65335; border:none;') }}</div>
+            </form>
+        </div>
+    </section>
 
+    <h2 style="text-align: center;">Comentarios</h2>
+    <br>
+    <p class="card-text" >
+        {% if not comments %}
+
+        {%endif%}
+            <h5 style="text-align: center;">Escribe el primer comentario!</h5>
+        {% for comment in comments %}
+            {% include 'main/_comment.html' %}
+        {% endfor %}  
+    </p>
+
+    
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> Más nuevos
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    Más antiguos <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 {% endblock %}

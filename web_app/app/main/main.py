@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request, g
 from flask.globals import current_app
 from flask_login import current_user, login_user, logout_user, login_required
-from web_app.app.forms import SearchForm, PostTransportistas, PostEmbarcadores, ContactForm    
-from web_app.app.models import FletesTransportistas, CargasEmbarcadores, ContactTable
+from web_app.app.forms import SearchForm, PostTransportistas, PostEmbarcadores, ContactForm, Comments    
+from web_app.app.models import FletesTransportistas, CargasEmbarcadores, ContactTable, CommentsFletesTransportistas, CommentsCargasEmbarcadores
 from werkzeug.urls import url_parse
 from web_app.config2 import Config
 from web_app.app import db
@@ -93,23 +93,57 @@ def search():
 
 @main_bp.route('/posts/<role>/<post_id>', methods=['GET', 'POST'])
 def posts(role, post_id):
+    
+    form = Comments()
+    page = request.args.get('page', 1, type=int)
     if role== "cargasembarcadores":
         oferta = CargasEmbarcadores.query.filter_by(id=post_id).first_or_404()
+        comments = db.session.query(CommentsCargasEmbarcadores).filter(CommentsCargasEmbarcadores.carga_id==post_id).order_by(CommentsCargasEmbarcadores.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
     elif role =="fletestransportistas":
         oferta = FletesTransportistas.query.filter_by(id=post_id).first_or_404()
+        comments = db.session.query(CommentsFletesTransportistas).filter(CommentsFletesTransportistas.flete_id==post_id).order_by(CommentsFletesTransportistas.timestamp.desc()).paginate(page, Config.POSTS_PER_PAGE, False)
     if request.method == 'GET':
-        return render_template('main/oferta.html', oferta=oferta)
-    if request.method == 'POST':
-        db.session.delete(oferta)
-        db.session.commit()
-        if role == "cargasembarcadores":
-            flash("Tu anuncio se ha borrado correctamente")
-            return redirect(url_for('.transportistas'))
-        elif role == "fletestransportistas":
-            flash("Tu anuncio se ha borrado correctamente")
-            return redirect(url_for('.embarcadores'))
+        next_url = url_for('main_bp.posts', role=oferta.__tablename__, post_id=oferta.id, page=comments.next_num) if comments.has_next else None
+        prev_url = url_for('main_bp.posts', role=oferta.__tablename__, post_id=oferta.id, page=comments.prev_num) if comments.has_prev else None
+        return render_template('main/oferta.html', oferta=oferta, comments=comments.items, next_url=next_url, prev_url=prev_url, form=form)
 
-    
+    if request.method == 'POST':
+        if not current_user.is_authenticated:
+            return redirect(url_for('auth_bp.login'))
+        if 'delete' in request.form:
+            db.session.delete(oferta)
+            db.session.commit()
+            if role == "cargasembarcadores":
+                flash("Tu anuncio se ha borrado correctamente")
+                return redirect(url_for('.transportistas'))
+            elif role == "fletestransportistas":
+                flash("Tu anuncio se ha borrado correctamente")
+                return redirect(url_for('.embarcadores'))
+        if 'comment' in request.form and form.validate_on_submit():
+            if role== "cargasembarcadores":
+                comment = CommentsCargasEmbarcadores(body=form.comment.data, username=current_user.username, carga_id=post_id)
+            elif role =="fletestransportistas":
+                comment = CommentsFletesTransportistas(body=form.comment.data, username=current_user.username, flete_id=post_id)
+            db.session.add(comment)
+            db.session.commit()
+            return redirect(url_for('main_bp.posts', role=oferta.__tablename__, post_id=oferta.id))
+        elif 'comment_id'in list(request.args):
+            print('deleting')
+            comment_id = request.args.get('comment_id')
+            if role == 'fletestransportistas':
+                comment_to_delete = CommentsFletesTransportistas.query.filter_by(id=comment_id).first_or_404()
+            elif role == 'cargasembarcadores':
+                comment_to_delete = CommentsCargasEmbarcadores.query.filter_by(id=comment_id).first_or_404()
+            db.session.delete(comment_to_delete)
+            db.session.commit()
+            return redirect(url_for('main_bp.posts', role=oferta.__tablename__, post_id=oferta.id))
+
+
+
+
+
+
+
 # @TODO - implement edit
 @main_bp.route('/edit_post', methods=['GET', 'POST'])
 def edit_post():
@@ -123,3 +157,9 @@ def edit_post():
 @main_bp.route('/trial', methods=['GET', 'POST'])
 def trial():
     return render_template('main/trial.html', title='trial')
+
+
+@main_bp.route('/API_FB_login', methods=['POST'])
+def API_FB_login():
+    print('request received')
+    return request
