@@ -3,6 +3,14 @@
     {{super()}}
     <link rel="shortcut icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png')}} ">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/base.css') }}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BDX393TMVM"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BDX393TMVM');
+    </script>
     {% endblock %}
     
     
@@ -78,7 +86,7 @@
                 <ul>
                     <li class="list-head">AYUDA</li>
                     <li><a href="{{ url_for('main_bp.contacto') }}">Contacto</a></li>
-                    <li><a href="#">Ayúdanos a mejorar!</a></li>
+                    <li><a href="{{ url_for('main_bp.contacto') }}">Ayúdanos a mejorar!</a></li>
                 </ul>
             </div>
         </div>

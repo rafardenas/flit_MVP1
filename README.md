@@ -60,3 +60,6 @@ right: 0;
 
 
 [SendGrid Python](https://github.com/sendgrid/sendgrid-python)
+
+
+[Sending data from HTML form to a Python script in Flask](https://stackoverflow.com/questions/11556958/sending-data-from-html-form-to-a-python-script-in-flask)
