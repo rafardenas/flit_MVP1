@@ -1,4 +1,4 @@
-<!--This is the index template-->
+
 {%- extends "main/base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
@@ -9,14 +9,15 @@
             <h1 style="color: #f65335; text-align: center; padding: 20px 20px;">¿Cómo funciona?</h1>
         
                 <div class="steps">
-                    <div class="step"><img src="static/img/paso1_em.png" alt="Hulu" class="logo" /></div>
-                    <div class="step"><img src="static/img/paso2_em.png" alt="Hulu" class="logo" /></div>
-                    <div class="step"><img src="static/img/paso3_em.png" alt="Hulu" class="logo" /></div>
+                    <div class="step"><a href="#form_em"><img src="static/img/paso1_em.png" alt="" class="logo"></a></div>
+                    <div class="step"><a href="#ofc_inline"><img src="static/img/paso2_em.png" alt="" class="logo" /></div>
+                    <div class="step"><a href="#"></a><img src="static/img/paso3_em.png" alt="" class="logo" /></div>
                 </div>
         </section>
     </div>
 
     <br>
+    <a id="form_em"></a>
     <div style="text-align: center;">
     <a href = "#form_em" ><h2 style="color: #333;; text-align: center; font-size: 25px; font-style: bold; text-transform: uppercase; font-weight: 400;">   Consigue transporte para tus cargas, ¿qué quieres embarcar hoy?   </h2>
     </a></div>
@@ -26,7 +27,6 @@
     <!--<h3>Inicia sesión para ofertar tus cargas</h3>-->
     {% endif %}
     <hr>
-    <a id="form_em"></a>
     {% if form %}
     <form action="" method="post">
         {{ form.csrf_token() }}
@@ -67,11 +67,14 @@
     </div>
     </form>
     {% endif %}
+    <a id=ofc_inline></a>
     <h1 style="text-align: center;">Transportistas listos para cargar</h1>
     <br>
+    <section>
     {% for post in posts %}
         {% include 'main/_post.html' %}
     {% endfor %}
+    </section>
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">

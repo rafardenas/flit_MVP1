@@ -12,8 +12,9 @@ main_bp = Blueprint('main_bp', __name__, template_folder='templates')
 
 @main_bp.route('/', methods=['GET', 'POST'])
 @main_bp.route('/index', methods=['GET', 'POST'])
-def index():    
-    return render_template('main/index.html', title='Carga rápido, ahorra más')
+def index():
+    form= PostTransportistas()    
+    return render_template('main/index.html', title='Carga rápido, ahorra más', form=form)
 
 
 @main_bp.route('/transportistas', methods=['GET', 'POST'])  
@@ -163,3 +164,8 @@ def trial():
 def API_FB_login():
     print('request received')
     return request
+
+
+@main_bp.route('/privacidad')
+def privacidad():
+    return render_template('main/privacidad.html', title="Aviso de Privacidad")
