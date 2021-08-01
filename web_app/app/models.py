@@ -164,7 +164,7 @@ class CargasEmbarcadores(SearchableMixin, db.Model):
     equipo_solicitado = db.Column(db.String(140), default="Sin más información")   #caja seca, redilas, plataforma, etc
     carga = db.Column(db.String(140), default="Sin más información")
     precio_total_ofertado = db.Column(db.Float, default=0.0)
-    precio_por_unidad_ofertado = db.Column(db.Float, default=0.0)
+    forma_de_pago = db.Column(db.String(200), default=0.0)
     descripcion = db.Column(db.String(140))
     contacto = db.Column(db.String(140), default="Sin más información")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow() - timedelta(hours=5, minutes=0))

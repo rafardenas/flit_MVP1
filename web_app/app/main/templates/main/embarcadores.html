@@ -27,6 +27,7 @@
     <!--<h3>Inicia sesión para ofertar tus cargas</h3>-->
     {% endif %}
     <hr>
+    <div class="container">
     {% if form %}
     <form action="" method="post">
         {{ form.csrf_token() }}
@@ -44,29 +45,28 @@
         <div class="form-group col-md-6">
             {{ wtf.form_field(form.precio_total_ofertado, class='form-control', placeholder='¿Cuál es la tarifa para este flete?') }}
         </div>
-        <!--
-        <div class="form-group col-md-4">
-            {{ wtf.form_field(form.precio_por_unidad_ofertado, class='form-control', placeholder='En caso de aplicar') }}
-        </div>-->
+        <div class="form-group col-md-6">
+            {{ wtf.form_field(form.forma_de_pago, class='form-control', placeholder='En caso de aplicar') }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ wtf.form_field(form.descripcion, class='form-control', placeholder='\"Se necesita equipo de seguridad para entrar a la planta...\" \n \"Se necesita llegar a las 8 am\"') }}
+        </div>
         <div class="row">
-            <div class="form-group col-md-6">
-                {{ wtf.form_field(form.descripcion, class='form-control', placeholder='\"Se necesita equipo de seguridad para entrar a la planta...\" \n \"Se necesita llegar a las 8 am\"') }}
-            </div>
             <div class="form-group col-md-6">
                 {{ wtf.form_field(form.carga, class='form-control', placeholder='\"Mercancía, Acero, Combustible\"') }}
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ wtf.form_field(form.contacto, class='form-control', placeholder='Forma de contacto principal') }}
+                </div>
         </div>
-        <div class="row">
-        <div class="form-group col-md-6">
-            {{ wtf.form_field(form.contacto, class='form-control', placeholder='Forma de contacto principal') }}
         </div>
-        <br>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12" style="text-align: center;">
         <div>{{ wtf.form_field(form.submit, class='btn btn-primary', placeholder='Contacto preferido') }}</div>
         </div>
-    </div>
     </form>
     {% endif %}
+    </div>
     <a id=ofc_inline></a>
     <h1 style="text-align: center;">Transportistas listos para cargar</h1>
     <br>

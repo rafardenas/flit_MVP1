@@ -73,7 +73,7 @@ class PostEmbarcadores(FlaskForm):
     equipo_solicitado = StringField("Equipo a Solicitar", validators=[DataRequired("Campo obligatorio")])
     carga = StringField("Carga", validators=[DataRequired()])
     precio_total_ofertado = FloatField("Total a Pagar", validators=[number_validator])
-    precio_por_unidad_ofertado = FloatField("Precio por Tonelada a Pagar")
+    forma_de_pago = StringField("Forma de pago")
     descripcion = TextAreaField("Información extra, permisos necesarios, consideraciones especiales", validators=[Length(min=0, max=300)])
     usar_info_perfil = BooleanField('Usar información de mi perfil')
     contacto = StringField("Forma de contacto", validators=[DataRequired("Requerido. ¿Cómo pueden contactarte los transportistas?")])

@@ -57,7 +57,7 @@ def embarcadores():
             flash("Regístrate para encontrar transportistas!")
             return redirect(url_for('user_bp.embarcadores'))
         post = CargasEmbarcadores(origen=form.origen.data, destino=form.destino.data, equipo_solicitado=form.equipo_solicitado.data, \
-            carga= form.carga.data, precio_total_ofertado=form.precio_total_ofertado.data, precio_por_unidad_ofertado=form.precio_por_unidad_ofertado.data, descripcion=form.descripcion.data, \
+            carga= form.carga.data, precio_total_ofertado=form.precio_total_ofertado.data, forma_de_pago=form.forma_de_pago.data, descripcion=form.descripcion.data, \
             contacto=form.contacto.data, user=current_user)
         
         db.session.add(post)
