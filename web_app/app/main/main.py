@@ -13,7 +13,18 @@ main_bp = Blueprint('main_bp', __name__, template_folder='templates')
 @main_bp.route('/', methods=['GET', 'POST'])
 @main_bp.route('/index', methods=['GET', 'POST'])
 def index():
-    form= PostTransportistas()    
+    form= PostTransportistas()
+    if form.validate_on_submit():
+        if not current_user.is_authenticated:
+            flash("Inicia sesión para ofertar tus equipos!")
+            return redirect(url_for('auth_bp.login'))
+        post = FletesTransportistas(origen=form.origen.data, destino=form.destino.data, equipo=form.equipo.data, \
+            precio_total_deseado=form.precio_total_deseado.data, precio_por_unidad_deseado=form.precio_por_unidad_deseado.data, descripcion=form.descripcion.data, \
+            contacto=form.contacto.data, user_id=current_user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash("Listo, tu equipo esta publicado")
+        return redirect(url_for('main_bp.transportistas', _anchor='cptinline'))
     return render_template('main/index.html', title='Carga rápido, ahorra más', form=form)
 
 
@@ -21,9 +32,8 @@ def index():
 def transportistas():
     form = PostTransportistas()
     if form.validate_on_submit():
-        print(form.__dict__)
         if not current_user.is_authenticated:
-            flash("Regístrate para encontrar cargas!")
+            flash("Regístrate para ofertar tus equipos!")
             return redirect(url_for('user_bp.register'))
         post = FletesTransportistas(origen=form.origen.data, destino=form.destino.data, equipo=form.equipo.data, \
             precio_total_deseado=form.precio_total_deseado.data, precio_por_unidad_deseado=form.precio_por_unidad_deseado.data, descripcion=form.descripcion.data, \

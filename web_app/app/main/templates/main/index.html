@@ -3,7 +3,6 @@
 
 {% block app_content %}
 
-
     <div class='container cta'>    
     <div class="header-content">
         <h1>No viajes vacío.</h1>
@@ -48,7 +47,7 @@
     <div class="container">
     <hr>
     <h3 style="text-align: center; margin-bottom: 30px; font-size: 25px; font-weight: bold; color:#f65335;">
-        Transportista, ofrece aquí tu equipo</h3></div>
+        Transportista, ofrece aquí tu equipo</h3>
     <a id="form_tr"></a>
     {% if form %}
     <form action="" method="post">
@@ -64,11 +63,13 @@
         <div class="form-group col-md-6">
             {{ wtf.form_field(form.equipo, class='form-control', placeholder='\"Tengo una caja de 48\"') }}
         </div>
-        <div class="form-group col-md-6">
+        <!--<div class="form-group col-md-6">
             {{ wtf.form_field(form.precio_total_deseado, class='form-control', placeholder='\"¿Cuál es tu tarifa para este flete?\"') }}
+        </div>-->
+        <div class="form-row ">
+        <div class="form-group col-md-12">
+            {{ wtf.form_field(form.descripcion, class='form-control', placeholder='\"Tengo licencia federal....\" \n \"Mi equipo tiene GPS\"') }}
         </div>
-        <div class="form-group">
-            {{ wtf.form_field(form.descripcion, class='form-control', placeholder='\"Tengo la certificación....\"') }}
         </div>    
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -76,17 +77,21 @@
           </div>
         </div>
         <br>
-        <div>{{ wtf.form_field(form.submit, class='btn btn-primary', placeholder='Contacto preferido') }}</div>
+        <div class="form-row">
+            <div class="form-group col-md-3" style="margin-top: 2%;">{{ wtf.form_field(form.submit, class='btn btn-primary', placeholder='') }}</div>
+        </div>  
     </form>
     {% endif %}
+    </div>
     <br>
+    <section>
     <div class="reason-title" style="margin-bottom:10px; margin-top: 20px; text-align: center;">
         ¿Es tu primera vez aqui?
     </div>
     <div class="col text-center">
         <a class="btn btn-primary cta" href="{{ url_for('main_bp.transportistas', _anchor='cptinline') }}" role="button" style="margin-top: 5px;">Revisar cargas disponibles</a>
     </div>
-    </div>
+    </section>
 
     
 
