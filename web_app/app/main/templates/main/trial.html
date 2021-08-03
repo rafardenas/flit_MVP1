@@ -2,16 +2,12 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <div class="row-margin-top" >
-        <button type="button" onclick="Trial();" class="btn btn-default">Facebook LOGIN</button>
-    </div>
-    <!--<div class="fb-login-button" data-width="" onclick="checkFBlogin();" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
-    <div id="name">
-    <div id="email">
-    <div id="id">
-
-
-        {% endblock %}
+        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+        <!--<div class="fb-login-button" data-width="" onclick="checkFBlogin();" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
+        <div id="name">
+        <div id="email">
+        <div id="id">
+    {% endblock %}
     {% block scripts %}
         <script src="static/javascript/trial.js"></script>
     {% endblock %}
