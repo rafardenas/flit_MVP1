@@ -28,11 +28,11 @@ def register():
         return redirect(url_for('main_bp.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, rol=form.emb_o_tr.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash("Usuario registrado!")
+        flash("Bienvenido, usuario registrado con éxito!")
         return redirect(url_for('auth_bp.login'))
     return render_template('user/register.html', title = "Regístrate", form=form)
 

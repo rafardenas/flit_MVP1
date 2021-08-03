@@ -1,6 +1,6 @@
 from typing import Text
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField, RadioField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from web_app.app.models import User
 from flask import request
@@ -24,6 +24,7 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     username = StringField("Nombre de usuario", validators=[DataRequired()])
     email = StringField("Correo Electrónico", validators=[DataRequired(), Email()])
+    emb_o_tr = RadioField('Rol', choices = [('T','Transportista'),('E','Embarcador')])
     password = PasswordField("Contraseña", validators=[DataRequired()])
     password2 = PasswordField("Confirmar Contraseña", validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Registrarse')
