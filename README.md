@@ -4,7 +4,7 @@ Beta version of Flit, better said MVP
 Web page to offer and request loads in Mexico logistics ecosystem
 
 
-##### Updating the database after a push
+##### Updating the database after a push (in heroku)
 ```
 $ heroku run python
 >>> from flit_beta import db    
@@ -16,6 +16,12 @@ $ heroku run python
 >>> exit() \\
 ```
 
+##### Updating the database after a push (in azure)
+
+1. go to: https://encuentracargasmx.scm.azurewebsites.net/webssh/host
+2. run:
+    - >>> flask db migrate
+    - >>> flask db upgrade
 
 ```
 q1 = sess.query(SomeClass).filter(SomeClass.foo=='bar')
@@ -63,3 +69,5 @@ right: 0;
 
 
 [Sending data from HTML form to a Python script in Flask](https://stackoverflow.com/questions/11556958/sending-data-from-html-form-to-a-python-script-in-flask)
+
+

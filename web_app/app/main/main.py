@@ -24,7 +24,7 @@ def index():
         db.session.add(post)
         db.session.commit()
         flash("Listo, tu equipo esta publicado")
-        return redirect(url_for('main_bp.transportistas', _anchor='cptinline'))
+        return redirect(url_for('main_bp.transportistas'))
     return render_template('main/index.html', title='Carga rápido, ahorra más', form=form)
 
 
