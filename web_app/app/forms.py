@@ -84,6 +84,7 @@ class PostEmbarcadores(FlaskForm):
 class ContactForm(FlaskForm):
     asunto = StringField("Asunto", validators=[DataRequired()])
     body = TextAreaField("Dudas, quejas o sugerencias", validators=[DataRequired()])
+    contacto = StringField('¿Cómo podemos contactarte?')
     submit = SubmitField("Enviar")
 
 

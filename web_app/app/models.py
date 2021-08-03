@@ -180,6 +180,7 @@ class ContactTable(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     asunto = db.Column(db.String(140))
     body = db.Column(db.String(140))
+    contacto = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow() - timedelta(hours=5, minutes=0))
 
 class CommentsFletesTransportistas(db.Model):

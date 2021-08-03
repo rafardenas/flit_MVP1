@@ -74,7 +74,7 @@ def embarcadores():
 def contacto():
     form = ContactForm()
     if form.validate_on_submit():
-        feedback = ContactTable(asunto=form.asunto.data, body=form.body.data)
+        feedback = ContactTable(asunto=form.asunto.data, body=form.body.data, contacto=form.contacto.data)
         db.session.add(feedback)
         db.session.commit()
         flash("Gracias por tus comentarios!")
