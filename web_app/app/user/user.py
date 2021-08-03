@@ -41,15 +41,17 @@ def register():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
-    q1 = db.session.query(CargasEmbarcadores).filter(CargasEmbarcadores.user_id==user.id)
-    q2 = db.session.query(FletesTransportistas).filter(FletesTransportistas.user_id==user.id)
-    #posts = q1.union(q2).paginate(page, Config.POSTS_PER_PAGE, False)
-    posts = q1.paginate(page, Config.POSTS_PER_PAGE, False)
-    #posts = q1.paginate(page, Config.POSTS_PER_PAGE, False)
-    #print(posts.items[0].destino)
-    #posts = q2.paginate(page, Config.POSTS_PER_PAGE, False)
-    #print(posts.items[0].destino)
-    #posts = posts.order_by(FletesTransportistas.timestamp.desc())
+    if user.rol == 'E':
+        q = db.session.query(CargasEmbarcadores).filter(CargasEmbarcadores.user_id==user.id)
+    elif user.rol == 'T':
+        q = db.session.query(FletesTransportistas).filter(FletesTransportistas.user_id==user.id)
+    else:
+        q = db.session.query(CargasEmbarcadores).filter(CargasEmbarcadores.user_id==user.id).all()
+        if len(q) == 0:
+            q = db.session.query(FletesTransportistas).filter(FletesTransportistas.user_id==user.id)
+        else:
+            q = db.session.query(CargasEmbarcadores).filter(CargasEmbarcadores.user_id==user.id)
+    posts = q.paginate(page, Config.POSTS_PER_PAGE, False)
     next_url = url_for('user_bp.user', username=user.username, page=posts.next_num) if posts.has_next else None
     prev_url = url_for('user_bp.user', username=user.username, page=posts.prev_num) if posts.has_prev else None
     form = EmptyForm()    
