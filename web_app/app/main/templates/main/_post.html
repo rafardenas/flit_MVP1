@@ -11,7 +11,6 @@
                     <th>Destino</th>
                     {%if not post.equipo_solicitado%}
                       <th>Equipo disponible</th>
-                      <th>Tarifa</th>
                     {%else%}
                       <th>Equipo solicitado</th>
                       <th>Tipo de Carga</th>
@@ -38,9 +37,7 @@
                 <td data-title="Equipo Solicitado">{{ post.equipo_solicitado }}</td>
                 {%endif%}
     
-                {%if not post.equipo_solicitado%}
-                <td data-title= "Total a cobrar:">${{ post.precio_total_deseado }}</td>
-                {%else%}
+                {%if post.equipo_solicitado%}
                 <td data-title="Total a pagar:">${{ post.precio_total_ofertado }}</td>
                 {%endif%}
                 
