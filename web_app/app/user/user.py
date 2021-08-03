@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
+from sqlalchemy.sql.sqltypes import String
 from web_app.app.forms import RegistrationForm, EmptyForm, EditProfileForm, ResetPasswordRequestForm, ResetPasswordForm
 from web_app.app.models import User, Post, FletesTransportistas, CargasEmbarcadores
 from werkzeug.urls import url_parse
@@ -7,6 +8,8 @@ from datetime import datetime
 from web_app.config2 import Config
 from web_app.app.user.email_mod import send_password_reset_email
 from web_app.app import db
+from sqlalchemy.sql.expression import cast
+import sqlalchemy
 
 
 
@@ -40,7 +43,8 @@ def user(username):
     page = request.args.get('page', 1, type=int)
     q1 = db.session.query(CargasEmbarcadores).filter(CargasEmbarcadores.user_id==user.id)
     q2 = db.session.query(FletesTransportistas).filter(FletesTransportistas.user_id==user.id)
-    posts = q1.union(q2).paginate(page, Config.POSTS_PER_PAGE, False)
+    #posts = q1.union(q2).paginate(page, Config.POSTS_PER_PAGE, False)
+    posts = q1.paginate(page, Config.POSTS_PER_PAGE, False)
     #posts = q1.paginate(page, Config.POSTS_PER_PAGE, False)
     #print(posts.items[0].destino)
     #posts = q2.paginate(page, Config.POSTS_PER_PAGE, False)
