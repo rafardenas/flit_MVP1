@@ -5,11 +5,17 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/base.css') }}">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BDX393TMVM"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', 'G-BDX393TMVM');
+        gtag('config', 'G-BDX393TMVM');
+    </script>
+    <!-- Panelbear Analytics - We respect your privacy -->
+    <script async src="https://cdn.panelbear.com/analytics.js?site=AWXiXn2A2Mu"></script>
+    <script>
+        window.panelbear = window.panelbear || function() { (window.panelbear.q = window.panelbear.q || []).push(arguments); };
+        panelbear('config', { site: 'AWXiXn2A2Mu' });
     </script>
     {% endblock %}
     
