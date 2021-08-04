@@ -1,14 +1,4 @@
 
-function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-    console.log('statusChangeCallback');
-    console.log(response);                   // The current login status of the person.
-    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-    testAPI();  
-    } else {                                 // Not logged into your webpage or we are unable to tell.
-    document.getElementById('status').innerHTML = 'Please log ' +
-        'into this webpage.';
-    }
-}
 
 
 function checkLoginState() {               // Called when a person is finished with the Login Button.
@@ -41,29 +31,35 @@ function testAPI() {                      // Testing Graph API after login.  See
     });
     };
 
-    function statusChangeCallback(response) {
-        FB.api('/me?fields=first_name,last_name,email,id', function(response) {
-            document.getElementById('name').innerHTML =
-            response.first_name + ' ' + response.last_name;
-                'Thanks for logging in, ' + response.name + '!';
-            document.getElementById('email').innerHTML = response.email;
-            document.getElementById('id').innerHTML = response.id;
-            document.getElementById('name').style.display = "block";
-            document.getElementById('email').style.display = "block";
-            document.getElementById('id').style.display = "block";
-            document.getElementById('FBloginBtn').style.display = "none";
-            document.getElementById('FBlogoutBtn').style.display = "block";
-
-
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);                   // The current login status of the person.
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+    testAPI();  
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+    document.getElementById('status').innerHTML = 'Please log ' +
+        'into this webpage.';
+    };
+    FB.api('/me?fields=first_name,last_name,email,id', function(response) {
+        document.getElementById('name').innerHTML =
+        response.first_name + ' ' + response.last_name;
+            'Thanks for logging in, ' + response.name + '!';
+        document.getElementById('email').innerHTML = response.email;
+        document.getElementById('id').innerHTML = response.id;
+        document.getElementById('name').style.display = "block";
+        document.getElementById('email').style.display = "block";
+        document.getElementById('id').style.display = "block";
+        document.getElementById('FBloginBtn').style.display = "none";
+        document.getElementById('FBlogoutBtn').style.display = "block";
         });
     };
 
-    function logout(response) {
-        FB.logout(function(response) {
-            document.getElementById('name').style.display = "none";
-            document.getElementById('email').style.display = "none";
-            document.getElementById('id').style.display = "none";
-            document.getElementById('FBloginBtn').style.display = "block";
-            document.getElementById('FBlogoutBtn').style.display = "none";
-        });
-    };
+function logout(response) {
+    FB.logout(function(response) {
+        document.getElementById('name').style.display = "none";
+        document.getElementById('email').style.display = "none";
+        document.getElementById('id').style.display = "none";
+        document.getElementById('FBloginBtn').style.display = "block";
+        document.getElementById('FBlogoutBtn').style.display = "none";
+    });
+};

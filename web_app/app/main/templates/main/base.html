@@ -85,7 +85,7 @@
             <div class="footer-lists">
                 <ul>
                     <li class="list-head">AYUDA</li>
-                    <li><a href="{{ url_for('main_bp.contacto') }}">Contacto</a></li>
+                    <li><a href="mailto:contacto@cargamx.com">Contacto</a></li>
                     <li><a href="{{ url_for('main_bp.contacto') }}">Ayúdanos a mejorar!</a></li>
                     <li><a href="{{ url_for('main_bp.privacidad') }}">Aviso de privacidad</a></li>
                 </ul>
@@ -133,13 +133,6 @@
         js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-
-
-        function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-        }
     </script>
 
 {% endblock %}
