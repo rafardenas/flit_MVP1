@@ -23,6 +23,11 @@ $ heroku run python
     - >>> flask db migrate
     - >>> flask db upgrade
 
+#### Dump a database from azure to .dump file
+
+PGPASSWORD=<password> /Library/PostgreSQL/13/bin/pg_dump -Fc --no-acl --no-owner -h <host> -U <user> <db_dame > <{folder where pg_admin can write}/{db_name}.dump
+
+
 ```
 q1 = sess.query(SomeClass).filter(SomeClass.foo=='bar')
 q2 = sess.query(SomeClass).filter(SomeClass.bar=='foo')
