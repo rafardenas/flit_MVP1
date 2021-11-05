@@ -1,7 +1,7 @@
 # Flit_beta
 
-Beta version of Flit, better said MVP
-Web page to offer and request loads in Mexico logistics ecosystem
+First MVP of Flit.
+Marketplace where companies and carriers conect themselves to ship their products(companies) and find loads(carriers).
 
 
 ##### Updating the database after a push (in heroku)
