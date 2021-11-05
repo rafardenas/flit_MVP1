@@ -27,6 +27,9 @@ $ heroku run python
 
 PGPASSWORD=<password> /Library/PostgreSQL/13/bin/pg_dump -Fc --no-acl --no-owner -h <host> -U <user> <db_dame > <{folder where pg_admin can write}/{db_name}.dump
 
+#### What if pg_dump command is not found?
+https://stackoverflow.com/questions/48362443/bash-pg-dump-command-not-found
+
 
 ```
 q1 = sess.query(SomeClass).filter(SomeClass.foo=='bar')
